@@ -1,19 +1,26 @@
 package sogong.collegelib.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 public class Book {
-    @Id
-    @GeneratedValue
+
+    @Id @GeneratedValue
     private Long id;
-    private String author_id;
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "AUTHOR_ID")
+    private Author author;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
+
 
 }

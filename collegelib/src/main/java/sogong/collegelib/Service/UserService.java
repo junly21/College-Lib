@@ -1,0 +1,41 @@
+package sogong.collegelib.Service;
+
+
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import sogong.collegelib.domain.User;
+import sogong.collegelib.repository.UserRepository;
+
+import java.util.List;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class UserService {
+    private final UserRepository userRepository;
+
+    @Transactional //변경
+    public Long join(User user) {
+        validateDuplicateMember(user); //중복 회원 검증
+
+        userRepository.save(user);
+        return user.getId();
+    }
+    private void validateDuplicateMember(User user) {
+        List<User> findMembers =
+                userRepository.findByName(user.getUsername());
+        if (!findMembers.isEmpty()) {
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
+        }
+    }
+    /**
+     *전체 회원 조회
+     */
+    public List<User> findUsers() {
+        return userRepository.findAll();
+    }
+    public User findOne(Long userId) {
+        return userRepository.findOne(userId);
+    }
+}
