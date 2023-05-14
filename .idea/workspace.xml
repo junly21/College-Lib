@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24eea515-0760-4bab-8c01-c485817304b6" name="Changes" comment="" />
+    <list default="true" id="24eea515-0760-4bab-8c01-c485817304b6" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/blog-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/blog-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/blog-frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/front/blog-frontend/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
