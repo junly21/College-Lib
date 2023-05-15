@@ -65,10 +65,10 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
       <form onSubmit={onSubmit}>
         <StyledInput
           autoComplete="username"
-          name="username"
+          name="loginId"
           placeholder="아이디"
           onChange={onChange}
-          value={form.username}
+          value={form.loginId}
         />
         <StyledInput
           autoComplete="new-password"
@@ -79,14 +79,23 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
           value={form.password}
         />
         {type === 'register' && (
-          <StyledInput
-            autoComplete="new-password"
-            name="passwordConfirm"
-            placeholder="비밀번호 확인"
-            type="password"
-            onChange={onChange}
-            value={form.passwordConfirm}
-          />
+          <>
+            <StyledInput
+              autoComplete="new-password"
+              name="passwordConfirm"
+              placeholder="비밀번호 확인"
+              type="password"
+              onChange={onChange}
+              value={form.passwordConfirm}
+            />
+            <StyledInput
+              autoComplete="name"
+              name="username"
+              placeholder="이름"
+              onChange={onChange}
+              value={form.username}
+            />
+          </>
         )}
 
         <ButtonWithMarginTop red fullWidth>
