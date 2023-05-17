@@ -22,6 +22,12 @@ public class UserService {
         userRepository.save(user);
         return user.getId();
     }
+
+    public User login(String loginId, String password) {
+        return userRepository.findByLoginId(loginId)
+                .filter(m -> m.getPassword().equals(password))
+                .orElse(null);
+    }
     private void validateDuplicateMember(User user) {
         List<User> findMembers =
                 userRepository.findByName(user.getUsername());

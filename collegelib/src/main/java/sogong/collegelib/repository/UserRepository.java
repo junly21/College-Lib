@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import sogong.collegelib.domain.User;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepository {
@@ -16,6 +17,13 @@ public class UserRepository {
     public User findOne(Long id) {
         return em.find(User.class, id);
     }
+
+    public Optional<User> findByLoginId(String loginId) {
+        return findAll().stream()
+                .filter(m -> m.getLoginId().equals(loginId))
+                .findFirst();
+    }
+
     public List<User> findAll() {
         return em.createQuery("select m from User m", User.class)
                 .getResultList();
