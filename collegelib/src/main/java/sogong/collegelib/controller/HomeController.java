@@ -31,4 +31,6 @@ public class HomeController {
         }
         return "loginHome";
     }
+
+//    로그인을 안한상태로 게시판이나 쪽지 보는 url들어가면 안보여자 홈화면
 }

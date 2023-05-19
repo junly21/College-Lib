@@ -10,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sogong.collegelib.Service.UserService;
 import sogong.collegelib.domain.User;
+import sogong.collegelib.exception.user.loginException.NotMatchUserException;
+import sogong.collegelib.exception.user.registerExceotion.*;
 
 import java.io.IOException;
 
@@ -22,13 +24,33 @@ public class UserController {
     @PostMapping(value = "/register")
     public User createForm(@RequestBody @Valid Registerdto registerdto, BindingResult bindingResult, HttpServletResponse response) throws IOException {
         System.out.println("성공");
-        if(bindingResult.hasErrors()){
-            response.sendError(409);
+//        if(bindingResult.hasErrors()){
+//            response.sendError(409);
+//        }
+        if(registerdto.getLoginId() == null){  //회원가입 폼에서 입력하지 않은 파트가 있다면 예외 처리
+            throw new NullLoginIdException();
         }
+        else if(registerdto.getUsername() == null) {
+            throw new NullUsernameException();
+        }
+        else if(registerdto.getPassword() == null) {
+            throw new NullPasswordException();
+        }
+        else if(registerdto.getPasswordConfirm() == null) {
+            throw new NullPasswordConfirmException();
+        }
+        //중복되는 아이디는 어떻게 처리??
+
+
+        if(!registerdto.getPassword().equals(registerdto.getPasswordConfirm())){ //password와 passwordConfirm이 일치하지 않으면 예외 처리
+            throw new NotMatchPasswordException();
+        }
+
         User registerUser = new User();
         registerUser.setUsername(registerdto.getUsername());
         registerUser.setLoginId(registerdto.getLoginId());
         registerUser.setPassword(registerdto.getPassword());
+
         userService.join(registerUser);
         //json형식으로 login ID , password, 이름
         return registerUser;
@@ -43,11 +65,17 @@ public class UserController {
             response.sendError(401);
         }
 
+//        if (bindingResult.hasErrors()) {
+//            log.info("errors={}", bindingResult);
+//            response.sendError(401);
+//        }
         User loginUser = userService.login(loginDto.getLoginId(), loginDto.getPassword());
+
+        //loginUser가 null이 떠서 잘 안 됨. 프론트에서 정리해줘야 함
+
         log.info("login? {}", loginUser);
-        if (loginUser == null) {
-            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
-            response.sendError(401);
+        if (loginUser == null) {  //비밀번호가 일치하지 않으면 예외 처리 username, loginId 확실히 구분
+            throw new NotMatchUserException();
         }
         //로그인 성공 처리 TODO
         HttpSession session = request.getSession();
