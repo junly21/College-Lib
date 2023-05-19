@@ -33,7 +33,7 @@ export const register = createAction(
     username,
   }),
 );
-export const login = createAction(LOGIN, ({ loginId, password }) => ({
+export const login = createAction(LOGIN, ({ loginId, password, username }) => ({
   loginId,
   password,
 }));

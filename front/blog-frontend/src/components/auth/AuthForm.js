@@ -7,6 +7,14 @@ import Button from '../common/Button';
  * 회원가입 또는 로그인 폼을 보여줍니다.
  */
 
+//에러
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
+
 const AuthFormBlock = styled.div`
   h3 {
     margin: 0;
@@ -57,7 +65,7 @@ const textMap = {
   register: '회원가입',
 };
 
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
+const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
   const text = textMap[type];
   return (
     <AuthFormBlock>
@@ -97,7 +105,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
             />
           </>
         )}
-
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <ButtonWithMarginTop red fullWidth>
           {text}
         </ButtonWithMarginTop>
