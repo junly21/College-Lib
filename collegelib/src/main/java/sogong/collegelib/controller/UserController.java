@@ -37,6 +37,7 @@ public class UserController {
     @PostMapping(value = "/login")
     public User login(@RequestBody @Valid LoginDto loginDto, BindingResult bindingResult,
                         HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("성공");
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             response.sendError(401);
