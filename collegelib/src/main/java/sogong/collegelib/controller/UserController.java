@@ -24,11 +24,6 @@ import java.io.IOException;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping(value = "/check")
-    public void fksdjf(){
-        System.out.println("/check확인");
-    }
-
 
     @PostMapping(value = "/register")
     public UserDto createForm(@RequestBody @Valid Registerdto registerdto, BindingResult bindingResult, HttpServletResponse response) throws IOException {
@@ -38,6 +33,8 @@ public class UserController {
 //        }
         if(registerdto.getLoginId() == null){  //회원가입 폼에서 입력하지 않은 파트가 있다면 예외 처리
             throw new NullLoginIdException();
+        } else if() { //중복되는 id 체크
+
         }
         else if(registerdto.getUsername() == null) {
             throw new NullUsernameException();
@@ -48,9 +45,9 @@ public class UserController {
         //중복되는 아이디는 어떻게 처리??
 
 
-//        if(!registerdto.getPassword().equals(registerdto.getPasswordConfirm())){ //password와 passwordConfirm이 일치하지 않으면 예외 처리
-//            throw new NotMatchPasswordException();
-//        }
+        if(!registerdto.getPassword().equals(registerdto.getPasswordConfirm())){ //password와 passwordConfirm이 일치하지 않으면 예외 처리
+            throw new NotMatchPasswordException();
+        }
 
         User registerUser = new User();
         registerUser.setUsername(registerdto.getUsername());
@@ -71,18 +68,18 @@ public class UserController {
     public User login(@RequestBody @Valid LoginDto loginDto, BindingResult bindingResult,
                       HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("로그인성공");
-        if (bindingResult.hasErrors()) {
-            log.info("errors={}", bindingResult);
-            response.sendError(401);
+
+        if(loginDto.getLoginId() == null) {
+            throw new NullLoginIdException();
+        }
+        else if(loginDto.getPassword() == null) {
+            throw new NullPasswordException();
         }
 
-//        if (bindingResult.hasErrors()) {
-//            log.info("errors={}", bindingResult);
-//            response.sendError(401);
-//        }
+
+
         User loginUser = userService.login(loginDto.getLoginId(), loginDto.getPassword());
 
-        //loginUser가 null이 떠서 잘 안 됨. 프론트에서 정리해줘야 함
 
         log.info("login? {}", loginUser);
         if (loginUser == null) {  //비밀번호가 일치하지 않으면 예외 처리 username, loginId 확실히 구분
@@ -96,12 +93,11 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    public void logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if(session != null){
             session.invalidate();
         }
-        return "redirect:/";
     }
 
 }

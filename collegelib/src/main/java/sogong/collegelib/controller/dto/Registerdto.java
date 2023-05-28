@@ -9,5 +9,6 @@ public class Registerdto {
     private String username;
     private String loginId;
     private String password;
+    private String passwordConfirm;
 
 }

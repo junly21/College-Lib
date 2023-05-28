@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sogong.collegelib.exception.ErrorResult;
+import sogong.collegelib.exception.user.homeExaception.NullSearchException;
 import sogong.collegelib.exception.user.loginException.NotExistUserException;
 import sogong.collegelib.exception.user.loginException.NotMatchUserException;
 import sogong.collegelib.exception.user.registerExceotion.*;
@@ -53,5 +54,15 @@ public class UserExControllerAdvice {   //http header 에 accept 가 application
     @ExceptionHandler(NotMatchUserException.class)
     public ErrorResult notMatchUserExHandle(){
         return new ErrorResult("notMatchUserInLogin", "아이디와 비밀번호가 일치하지 않습니다.");
+    }
+
+    @Slf4j
+    @RestControllerAdvice
+    public static class HomeExControllerAdvice {    //http header 에 accept 가 application/json 이어야 함
+
+        @ExceptionHandler(NullSearchException.class)
+        public ErrorResult nullSearchExHandle() {
+            return new ErrorResult("nullSearch", "검색할 정보를 입력하시오");
+        }
     }
 }
