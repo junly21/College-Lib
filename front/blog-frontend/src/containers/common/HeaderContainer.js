@@ -4,12 +4,12 @@ import Header from '../../components/common/Header';
 import { logout } from '../../modules/user';
 
 const HeaderContainer = () => {
-  const { user } = useSelector(({ user }) => ({ user: user.user }));
+  const { auth2 } = useSelector(({ auth }) => ({ auth2: auth.auth2 }));
   const dispatch = useDispatch();
   const onLogout = () => {
     dispatch(logout());
   };
-  return <Header user={user} onLogout={onLogout} />;
+  return <Header auth2={auth2} onLogout={onLogout} />;
 };
 
 export default HeaderContainer;

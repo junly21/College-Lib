@@ -10,9 +10,9 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth2, authError, user } = useSelector(({ auth, user }) => ({
     form: auth.login,
-    auth: auth.auth,
+    auth2: auth.auth2,
     authError: auth.authError,
     user: user.user,
   }));
@@ -48,22 +48,24 @@ const LoginForm = () => {
       setError('로그인 실패');
       return;
     }
-    if (auth) {
-      console.log('로그인 성공');
-      dispatch(check());
-    }
-  }, [auth, authError, dispatch]);
 
-  useEffect(() => {
-    if (user) {
+    if (auth2) {
+      console.log('로그인 성공');
       navigate('/');
-      try {
-        localStorage.setItem('user', JSON.stringify(user));
-      } catch (e) {
-        console.log('로컬스토리지가 동작중이지 않습니다.');
-      }
+      console.log(auth2);
     }
-  }, [navigate, user]);
+  }, [auth2, authError, dispatch]);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate('/');
+  //     try {
+  //       localStorage.setItem('user', JSON.stringify(user));
+  //     } catch (e) {
+  //       console.log('로컬스토리지가 동작중이지 않습니다.');
+  //     }
+  //   }
+  // }, [navigate, user]);
 
   return (
     <AuthForm

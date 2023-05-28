@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import sogong.collegelib.Service.UserService;
+import sogong.collegelib.controller.dto.LoginDto;
+import sogong.collegelib.controller.dto.Registerdto;
+import sogong.collegelib.controller.dto.UserDto;
 import sogong.collegelib.domain.User;
 import sogong.collegelib.exception.user.loginException.NotMatchUserException;
 import sogong.collegelib.exception.user.registerExceotion.*;
@@ -21,9 +24,15 @@ import java.io.IOException;
 public class UserController {
     private final UserService userService;
 
+    @GetMapping(value = "/check")
+    public void fksdjf(){
+        System.out.println("/check확인");
+    }
+
+
     @PostMapping(value = "/register")
-    public User createForm(@RequestBody @Valid Registerdto registerdto, BindingResult bindingResult, HttpServletResponse response) throws IOException {
-        System.out.println("성공");
+    public UserDto createForm(@RequestBody @Valid Registerdto registerdto, BindingResult bindingResult, HttpServletResponse response) throws IOException {
+        System.out.println("회원가입성공");
 //        if(bindingResult.hasErrors()){
 //            response.sendError(409);
 //        }
@@ -36,30 +45,32 @@ public class UserController {
         else if(registerdto.getPassword() == null) {
             throw new NullPasswordException();
         }
-        else if(registerdto.getPasswordConfirm() == null) {
-            throw new NullPasswordConfirmException();
-        }
         //중복되는 아이디는 어떻게 처리??
 
 
-        if(!registerdto.getPassword().equals(registerdto.getPasswordConfirm())){ //password와 passwordConfirm이 일치하지 않으면 예외 처리
-            throw new NotMatchPasswordException();
-        }
+//        if(!registerdto.getPassword().equals(registerdto.getPasswordConfirm())){ //password와 passwordConfirm이 일치하지 않으면 예외 처리
+//            throw new NotMatchPasswordException();
+//        }
 
         User registerUser = new User();
         registerUser.setUsername(registerdto.getUsername());
         registerUser.setLoginId(registerdto.getLoginId());
         registerUser.setPassword(registerdto.getPassword());
 
+        UserDto user = new UserDto();
+        user.setHashedpassword(registerdto.getUsername());
+        user.setLoginId(registerdto.getLoginId());
+        user.setPassword(registerdto.getPassword());
+
         userService.join(registerUser);
         //json형식으로 login ID , password, 이름
-        return registerUser;
+        return user;
     }
 
     @PostMapping(value = "/login")
     public User login(@RequestBody @Valid LoginDto loginDto, BindingResult bindingResult,
-                        HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("성공");
+                      HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("로그인성공");
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             response.sendError(401);
