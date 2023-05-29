@@ -45,4 +45,9 @@ public class UserService {
     public User findOne(Long userId) {
         return userRepository.findOne(userId);
     }
+
+    public User findByLoginId(String loginId) {
+        return userRepository.findByLoginId(loginId)
+                .orElse(null);
+    }
 }

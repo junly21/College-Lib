@@ -63,8 +63,14 @@ public class UserController {
         return user;
     }
 
+    @PostMapping(value = "/check")
+    public LoginDto check(@RequestBody LoginDto logindto){
+        System.out.println("check");
+        return logindto;
+    }
+
     @PostMapping(value = "/login")
-    public User login(@RequestBody @Valid LoginDto loginDto, BindingResult bindingResult,
+    public LoginDto login(@RequestBody @Valid LoginDto loginDto, BindingResult bindingResult,
                       HttpServletRequest request, HttpServletResponse response) throws IOException {
 //        if(loginDto.getLoginId() == null) {
 //            throw new NullLoginIdException();
@@ -74,19 +80,23 @@ public class UserController {
 //        }
 
 
+        System.out.println(loginDto.getLoginId());
 
         User loginUser = userService.login(loginDto.getLoginId(), loginDto.getPassword());
 
-
-        log.info("login? {}", loginUser);
         if (loginUser == null) {  //비밀번호가 일치하지 않으면 예외 처리 username, loginId 확실히 구분
             throw new NotMatchUserException();
         }
         //로그인 성공 처리 TODO
         HttpSession session = request.getSession();
         session.setAttribute("loginUser", loginUser);
+        LoginDto loginDto1 = new LoginDto();
+        loginDto1.setLoginId(loginUser.getLoginId());
+        loginDto1.setPassword(loginUser.getPassword());
+        System.out.println(loginDto1.getLoginId());
+        System.out.println(loginDto1.getPassword());
         //json형식 login Id
-        return loginUser;
+        return loginDto1;
     }
 
     @PostMapping("/logout")

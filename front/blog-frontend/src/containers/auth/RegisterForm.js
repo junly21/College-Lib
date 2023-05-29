@@ -160,9 +160,9 @@ const RegisterForm = () => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      dispatch(check());
+      navigate('/login');
     }
-  }, [auth, authError, dispatch]);
+  }, [auth /*, dispatch*/, navigate]);
 
   // user 값이 잘 설정되었는지 확인
   useEffect(() => {
