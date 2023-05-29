@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import sogong.collegelib.exception.user.loginException.NotLoginUserException;
 
 @Slf4j
 public class LoginCheckInterceptor implements HandlerInterceptor {
@@ -18,8 +19,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         if (session == null || session.getAttribute("loginUser") == null) {
             log.info("미인증 사용자 요청");
             //로그인으로 redirect
-            response.sendRedirect("/login?redirectURL=" + requestURI);
-            return false;
+            throw new NotLoginUserException();
         }
         return true;
     }

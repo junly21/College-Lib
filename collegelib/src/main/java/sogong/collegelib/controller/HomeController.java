@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sogong.collegelib.Service.BookService;
+import sogong.collegelib.domain.Book;
 import sogong.collegelib.domain.User;
 import sogong.collegelib.repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -20,9 +22,10 @@ import sogong.collegelib.repository.UserRepository;
 public class HomeController {
 
     private final UserRepository userRepository;
+    private final BookService bookService;
 
     @GetMapping("/")
-    public ResponseEntity<?> homeLogin(@RequestParam String search, HttpServletRequest request) {
+    public ResponseEntity<?> homeLogin(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             return ResponseEntity.ok("home");
@@ -37,4 +40,8 @@ public class HomeController {
         return ResponseEntity.ok("home");
     }
 
+    @GetMapping("/search")
+    public List<Book> searchBook(@RequestBody String keyword) {
+       return bookService.findBooksByKeyword(keyword);
+    }
 }
