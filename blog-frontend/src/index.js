@@ -11,8 +11,9 @@ import rootReducer from './modules';
 const store = createStore(rootReducer, composeWithDevTools());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+root.render(  
   <Provider store={store}>
+    
     <BrowserRouter>
       <App />
     </BrowserRouter>
