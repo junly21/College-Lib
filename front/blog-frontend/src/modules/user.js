@@ -9,7 +9,6 @@ const TEMP_SET_USER = 'user/TEMP_SET_USER'; // 새로고침 이후 임시 로그
 // 회원 정보 확인
 const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] =
   createRequestActionTypes('user/CHECK');
-
 const LOGOUT = 'user/LOGOUT';
 
 export const tempSetUser = createAction(TEMP_SET_USER, (user) => user);
@@ -28,8 +27,8 @@ function checkFailureSaga() {
 
 function* logoutSaga() {
   try {
-    yield call(authAPI.logout);
-    localStorage.removeItem('user');
+    yield call(authAPI.logout); // logout API 호출
+    localStorage.removeItem('user'); // localStorage 에서 user 제거
   } catch (e) {
     console.log(e);
   }
@@ -62,7 +61,7 @@ export default handleActions(
       user: null,
       checkError: error,
     }),
-    [LOGOUT]: (state, { payload: user }) => ({
+    [LOGOUT]: (state) => ({
       ...state,
       user: null,
     }),
