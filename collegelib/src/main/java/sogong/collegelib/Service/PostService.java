@@ -3,6 +3,7 @@ package sogong.collegelib.Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sogong.collegelib.domain.Book;
 import sogong.collegelib.domain.Post;
 import sogong.collegelib.repository.PostRepository;
 
@@ -19,8 +20,12 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public Post findOne(Long postId) {
-        return postRepository.findOne(postId);
+    public Book findBookOne(Long bookId) {
+        return postRepository.findBookOne(bookId);
+    }
+
+    public Post findPostOne(Long postId) {
+        return postRepository.findPostOne(postId);
     }
 
     public List<Post> findBuyPost(Long bookId) {

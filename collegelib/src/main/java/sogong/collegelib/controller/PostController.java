@@ -4,8 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import sogong.collegelib.Service.PostService;
-import sogong.collegelib.controller.dto.BookDto;
 import sogong.collegelib.controller.dto.PostDto;
+import sogong.collegelib.domain.Book;
+import sogong.collegelib.domain.Post;
 
 import java.util.List;
 
@@ -16,26 +17,24 @@ public class PostController {
 
     private final PostService postService;
 
-    @GetMapping("/{bookId}")
-    public BookDto lookBook(@PathVariable Long bookId) {
-
-        return null;
+    @GetMapping("/info/{bookId}")
+    public Book lookBook(@PathVariable Long bookId) {
+        return postService.findBookOne(bookId);
     }
 
-    @GetMapping("/{bookId}/buy")
-    public List<PostDto> buyPost(@PathVariable Long bookId) {
-
-        return null;
+    @GetMapping("/board/buy/{bookId}")
+    public List<Post> buyPost(@PathVariable Long bookId) {
+        return postService.findBuyPost(bookId);
     }
 
-    @GetMapping("/{bookId}/sell")
-    public List<PostDto> sellPost(@PathVariable Long bookId) {
-        return null;
+    @GetMapping("/board/sell/{bookId}")
+    public List<Post> sellPost(@PathVariable Long bookId) {
+        return postService.findSellPost(bookId);
     }
 
-    @GetMapping("/{bookId}/qa")
-    public List<PostDto> qaPost(@PathVariable Long bookId) {
-        return null;
+    @GetMapping("/board/qa/{bookId}")
+    public List<Post> qaPost(@PathVariable Long bookId) {
+        return postService.findQaPost(bookId);
     }
 
     @PostMapping("/{bookId}/buy/add")

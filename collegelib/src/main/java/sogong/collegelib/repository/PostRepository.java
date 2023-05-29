@@ -3,6 +3,7 @@ package sogong.collegelib.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import sogong.collegelib.domain.Book;
 import sogong.collegelib.domain.Post;
 import sogong.collegelib.domain.User;
 
@@ -17,7 +18,11 @@ public class PostRepository {
     public void save(Post post) {
         em.persist(post);
     }
-    public Post findOne(Long id) {
+
+    public Book findBookOne(Long id) {
+        return em.find(Book.class, id);
+    }
+    public Post findPostOne(Long id) {
         return em.find(Post.class, id);
     }
 

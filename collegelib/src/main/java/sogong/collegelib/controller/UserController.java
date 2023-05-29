@@ -31,11 +31,10 @@ public class UserController {
 //        if(bindingResult.hasErrors()){
 //            response.sendError(409);
 //        }
-        if(registerdto.getLoginId() == null){  //회원가입 폼에서 입력하지 않은 파트가 있다면 예외 처리
+        if(registerdto.getLoginId() == null) {  //회원가입 폼에서 입력하지 않은 파트가 있다면 예외 처리
             throw new NullLoginIdException();
-        } else if() { //중복되는 id 체크
-
         }
+
         else if(registerdto.getUsername() == null) {
             throw new NullUsernameException();
         }
@@ -45,9 +44,9 @@ public class UserController {
         //중복되는 아이디는 어떻게 처리??
 
 
-        if(!registerdto.getPassword().equals(registerdto.getPasswordConfirm())){ //password와 passwordConfirm이 일치하지 않으면 예외 처리
-            throw new NotMatchPasswordException();
-        }
+//        if(!registerdto.getPassword().equals(registerdto.getPasswordConfirm())){ //password와 passwordConfirm이 일치하지 않으면 예외 처리
+//            throw new NotMatchPasswordException();
+//        }
 
         User registerUser = new User();
         registerUser.setUsername(registerdto.getUsername());
