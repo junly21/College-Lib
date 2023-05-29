@@ -2,6 +2,7 @@ package sogong.collegelib.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
 public class Book {
 
     @Id @GeneratedValue
@@ -22,5 +24,8 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
-
+    public Book(String name, Author author) {
+        this.name = name;
+        this.author = author;
+    }
 }

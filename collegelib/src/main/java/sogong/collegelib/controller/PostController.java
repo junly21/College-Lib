@@ -3,9 +3,13 @@ package sogong.collegelib.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import sogong.collegelib.Service.BookService;
 import sogong.collegelib.Service.PostService;
 import sogong.collegelib.controller.dto.BookDto;
 import sogong.collegelib.controller.dto.PostDto;
+import sogong.collegelib.domain.Book;
+import sogong.collegelib.domain.Post;
+import sogong.collegelib.exception.board.NotExistBookException;
 
 import java.util.List;
 
@@ -15,6 +19,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final BookService bookService;
 
     @GetMapping("/{bookId}")
     public BookDto lookBook(@PathVariable Long bookId) {
@@ -50,6 +55,26 @@ public class PostController {
 
     @PostMapping("/{bookId}/qa/add")
     public void qaPostAdd(@PathVariable Long bookId) {
+
+    }
+
+    @GetMapping("/buy/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭
+    public void getBuyPost(@PathVariable Long bookId, @PathVariable Long postId) {
+        Book book = bookService.findOne(bookId);
+
+
+        if(book == null){
+            throw new NotExistBookException();
+        }
+    }
+
+    @GetMapping("/sell/{bookId}/{postId}")  //팝니다 게시판에서 특정 게시글 클릭
+    public void getSellPost(@PathVariable Long bookId, @PathVariable Long postId) {
+
+    }
+
+    @GetMapping("/qa/{bookId}/{postId}")  //Q&A 게시판에서 특정 게시글 클릭
+    public void getQaPost(@PathVariable Long bookId, @PathVariable Long postId) {
 
     }
 

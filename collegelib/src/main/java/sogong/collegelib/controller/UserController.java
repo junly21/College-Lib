@@ -33,8 +33,6 @@ public class UserController {
 //        }
         if(registerdto.getLoginId() == null){  //회원가입 폼에서 입력하지 않은 파트가 있다면 예외 처리
             throw new NullLoginIdException();
-        } else if() { //중복되는 id 체크
-
         }
         else if(registerdto.getUsername() == null) {
             throw new NullUsernameException();
@@ -45,9 +43,9 @@ public class UserController {
         //중복되는 아이디는 어떻게 처리??
 
 
-        if(!registerdto.getPassword().equals(registerdto.getPasswordConfirm())){ //password와 passwordConfirm이 일치하지 않으면 예외 처리
-            throw new NotMatchPasswordException();
-        }
+//        if(!registerdto.getPassword().equals(registerdto.getPasswordConfirm())){ //password와 passwordConfirm이 일치하지 않으면 예외 처리
+//            throw new NotMatchPasswordException();
+//        }
 
         User registerUser = new User();
         registerUser.setUsername(registerdto.getUsername());
@@ -93,11 +91,10 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public void logout(HttpServletRequest request) {
+    public void logout(HttpServletRequest request) {  //로그인 되어 있지 않은 상태에서 /logout을 접근했을 때도 한 번 고려해보기
         HttpSession session = request.getSession(false);
         if(session != null){
             session.invalidate();
         }
     }
-
 }

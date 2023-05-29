@@ -3,8 +3,7 @@ package sogong.collegelib.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,10 +21,15 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
 public class Author {
     @Id @GeneratedValue
     private Long id;
     private String name;
+
+    public Author(String name) {
+        this.name = name;
+    }
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();

@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sogong.collegelib.exception.ErrorResult;
-import sogong.collegelib.exception.board.InvalidUserException;
-import sogong.collegelib.exception.board.NotExistBookException;
-import sogong.collegelib.exception.board.NullTextException;
-import sogong.collegelib.exception.board.NullTitleException;
+import sogong.collegelib.exception.board.*;
 
 @Slf4j
 @RestControllerAdvice
@@ -35,5 +32,10 @@ public class BoardExControllerAdvice {
     @ExceptionHandler(InvalidUserException.class)
     public ErrorResult invalidUserExHandle() {
         return new ErrorResult("invalidUser", "허용되지 않는 접근입니다.");
+    }
+
+    @ExceptionHandler(NotExistPostException.class)
+    public ErrorResult notExistPostExHandle() {
+        return new ErrorResult("notExistPost", "존재하지 않는 게시글의 정보입니다.");
     }
 }
