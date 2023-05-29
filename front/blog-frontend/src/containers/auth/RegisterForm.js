@@ -56,8 +56,7 @@ const RegisterForm = () => {
   // 회원가입 성공 / 실패 처리
   useEffect(() => {
     if (auth && auth.message) {
-      // 기타 이유
-      setError(auth && auth.message);
+      setError(auth.message);
       return;
     }
 
