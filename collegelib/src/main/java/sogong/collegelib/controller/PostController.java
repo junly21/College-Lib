@@ -10,6 +10,7 @@ import sogong.collegelib.controller.dto.PostDto;
 import sogong.collegelib.domain.Book;
 import sogong.collegelib.domain.Post;
 import sogong.collegelib.exception.board.NotExistBookException;
+import sogong.collegelib.exception.board.NotExistPostException;
 
 import java.util.List;
 
@@ -59,23 +60,51 @@ public class PostController {
     }
 
     @GetMapping("/buy/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭
-    public void getBuyPost(@PathVariable Long bookId, @PathVariable Long postId) {
+    public Post getBuyPost(@PathVariable Long bookId, @PathVariable Long postId) {
         Book book = bookService.findOne(bookId);
-
 
         if(book == null){
             throw new NotExistBookException();
         }
+
+        for (Post post : book.getPosts()) {
+            if(post.getId() == postId){
+                return post;
+            }
+        }
+        throw new NotExistPostException();
     }
 
     @GetMapping("/sell/{bookId}/{postId}")  //팝니다 게시판에서 특정 게시글 클릭
-    public void getSellPost(@PathVariable Long bookId, @PathVariable Long postId) {
+    public Post getSellPost(@PathVariable Long bookId, @PathVariable Long postId) {
+        Book book = bookService.findOne(bookId);
 
+        if(book == null){
+            throw new NotExistBookException();
+        }
+
+        for (Post post : book.getPosts()) {
+            if(post.getId() == postId){
+                return post;
+            }
+        }
+        throw new NotExistPostException();
     }
 
     @GetMapping("/qa/{bookId}/{postId}")  //Q&A 게시판에서 특정 게시글 클릭
-    public void getQaPost(@PathVariable Long bookId, @PathVariable Long postId) {
+    public Post getQaPost(@PathVariable Long bookId, @PathVariable Long postId) {
+        Book book = bookService.findOne(bookId);
 
+        if(book == null){
+            throw new NotExistBookException();
+        }
+
+        for (Post post : book.getPosts()) {
+            if(post.getId() == postId){
+                return post;
+            }
+        }
+        throw new NotExistPostException();
     }
 
 
