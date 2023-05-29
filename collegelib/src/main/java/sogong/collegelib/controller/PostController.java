@@ -22,42 +22,21 @@ public class PostController {
     private final PostService postService;
     private final BookService bookService;
 
-    @GetMapping("/{bookId}")
-    public BookDto lookBook(@PathVariable Long bookId) {
+//    @GetMapping("/board/buy/{bookId}")
+//    public List<Post> getBuyBoard(@PathVariable Long bookId) {
+//
+//    }
+//
+//    @GetMapping("/board/sell/{bookId}")
+//    public List<Post> getSellBoard(@PathVariable Long bookId) {
+//
+//    }
+//
+//    @GetMapping("/board/qa/{bookId}")
+//    public List<Post> getQaBoard(@PathVariable Long bookId) {
+//
+//    }
 
-        return null;
-    }
-
-    @GetMapping("/{bookId}/buy")
-    public List<PostDto> buyPost(@PathVariable Long bookId) {
-
-        return null;
-    }
-
-    @GetMapping("/{bookId}/sell")
-    public List<PostDto> sellPost(@PathVariable Long bookId) {
-        return null;
-    }
-
-    @GetMapping("/{bookId}/qa")
-    public List<PostDto> qaPost(@PathVariable Long bookId) {
-        return null;
-    }
-
-    @PostMapping("/{bookId}/buy/add")
-    public void buyPostAdd(@PathVariable Long bookId) {
-
-    }
-
-    @PostMapping("/{bookId}/sell/add")
-    public void sellPostAdd(@PathVariable Long bookId) {
-
-    }
-
-    @PostMapping("/{bookId}/qa/add")
-    public void qaPostAdd(@PathVariable Long bookId) {
-
-    }
 
     @GetMapping("/buy/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭
     public Post getBuyPost(@PathVariable Long bookId, @PathVariable Long postId) {
@@ -108,6 +87,18 @@ public class PostController {
     }
 
 
-
-
+//    @GetMapping("/board/buy/{bookId}/write")
+//    public void writeBuyPost(@PathVariable Long bookId) {
+//
+//    }
+//
+//    @GetMapping("/board/sell/{bookId}/write")
+//    public void writeSellPost(@PathVariable Long bookId) {
+//
+//    }
+//
+//    @GetMapping("/board/qa/{bookId}/write")
+//    public void writeQaPost(@PathVariable Long bookId) {
+//
+//    }
 }

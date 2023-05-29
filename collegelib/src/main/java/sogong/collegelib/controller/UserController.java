@@ -1,5 +1,6 @@
 package sogong.collegelib.controller;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -65,8 +66,6 @@ public class UserController {
     @PostMapping(value = "/login")
     public User login(@RequestBody @Valid LoginDto loginDto, BindingResult bindingResult,
                       HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("로그인성공");
-
 //        if(loginDto.getLoginId() == null) {
 //            throw new NullLoginIdException();
 //        }
@@ -92,13 +91,11 @@ public class UserController {
 
     @PostMapping("/logout")
     public void logout(HttpServletRequest request) {  //로그인 되어 있지 않은 상태에서 /logout을 접근했을 때도 한 번 고려해보기
-        System.out.println("---------hello");
         HttpSession session = request.getSession(false);
         if(session != null){
-            System.out.println("start");
             session.invalidate();
-            request.getSession(true);
-            System.out.println("end");
         }
     }
+
+
 }
