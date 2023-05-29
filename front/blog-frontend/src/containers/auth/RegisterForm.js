@@ -55,10 +55,10 @@ const RegisterForm = () => {
 
   // 회원가입 성공 / 실패 처리
   useEffect(() => {
-    if (authError) {
+    if (auth) {
       // 계정명이 이미 존재할 때
-      if (authError.response.status === 409) {
-        setError('이미 존재하는 계정명입니다.');
+      if (auth && auth.message) {
+        setError(auth.message);
         return;
       }
       // 기타 이유

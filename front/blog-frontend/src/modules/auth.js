@@ -58,7 +58,6 @@ const initialState = {
     password: '',
   },
   auth: null,
-  auth2: null,
   authError: null,
 };
 
@@ -84,10 +83,10 @@ const auth = handleActions(
       authError: error,
     }),
     // 로그인 성공
-    [LOGIN_SUCCESS]: (state, { payload: auth2 }) => ({
+    [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
-      auth2,
+      auth,
     }),
     // 로그인 실패
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
