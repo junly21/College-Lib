@@ -16,53 +16,50 @@ import sogong.collegelib.exception.user.registerExceotion.*;
 @RestControllerAdvice
 public class UserExControllerAdvice {   //http header 에 accept 가 application/json 이어야 함
 
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(NullLoginIdException.class)
     public ErrorResult nullLoginIdExHandle(){
         return new ErrorResult("nullLoginId", "아이디를 입력하시오.");
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(NullUsernameException.class)
     public ErrorResult nullUsernameExHandle() {
         return new ErrorResult("nullUsername", "username을 입력하시오.");
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(NullPasswordException.class)
     public ErrorResult nullPasswordExHandle() {
         return new ErrorResult("nullPassword", "비밀번호를 입력하시오.");
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(NullPasswordConfirmException.class)
     public ErrorResult nullPasswordConfirmExHandle() { return new ErrorResult("nullPasswordConfirm", "확인 비밀번호를 입력하시오."); }
 
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(NotMatchPasswordException.class)
     public ErrorResult notMatchPasswordExHandle() {
         return new ErrorResult("notMatchPassword", "비밀번호가 일치하지 않습니다.");
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(DuplicateLoginIdException.class)
     public ErrorResult duplicateLoginIdExHandle() {
         return new ErrorResult("duplicateLoginIdInDB", "이미 존재하는 id입니다.");
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(NotExistUserException.class)
     public ErrorResult notExistUserExHandle() {
         return new ErrorResult("notExistUser", "존재하지 않는 회원입니다.");
     }
 
 
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(NotMatchUserException.class)
     public ErrorResult notMatchUserExHandle(){
         return new ErrorResult("notMatchUserInLogin", "아이디와 비밀번호가 일치하지 않습니다.");
-    }
-
-    @Slf4j
-    @RestControllerAdvice
-    public static class HomeExControllerAdvice {    //http header 에 accept 가 application/json 이어야 함
-
-        @ExceptionHandler(NullSearchException.class)
-        public ErrorResult nullSearchExHandle() {
-            return new ErrorResult("nullSearch", "검색할 정보를 입력하시오");
-        }
     }
 }
