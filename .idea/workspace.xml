@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="24eea515-0760-4bab-8c01-c485817304b6" name="Changes" comment="Changes">
+      <change afterPath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/controller/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/controller/LoginDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/controller/interceptor/LoginCheckInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collegelib/.gradle/7.6.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/collegelib/.gradle/7.6.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collegelib/.gradle/7.6.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/collegelib/.gradle/7.6.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collegelib/.gradle/7.6.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/collegelib/.gradle/7.6.1/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collegelib/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/collegelib/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/controller/Userdto.java" beforeDir="false" afterPath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/controller/Registerdto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/collegelib/src/main/java/sogong/collegelib/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/blog-frontend/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/front/blog-frontend/node_modules/.cache/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/blog-frontend/node_modules/.cache/default-development/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/front/blog-frontend/node_modules/.cache/default-development/0.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/blog-frontend/node_modules/.cache/default-development/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/front/blog-frontend/node_modules/.cache/default-development/index.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/blog-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/blog-frontend/package.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2PeDWN5ZxGHbR9gzvp6BaR8Pryi" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jeong-uiyeob/아주대/소공 강노/프로젝트/College-Lib&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="24eea515-0760-4bab-8c01-c485817304b6" name="Changes" comment="" />
+      <created>1683808684859</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1683808684859</updated>
+    </task>
+    <servers />
+  </component>
+</project>
