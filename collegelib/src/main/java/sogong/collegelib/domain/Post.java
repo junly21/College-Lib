@@ -15,6 +15,7 @@ public class Post {
     @Id
     @GeneratedValue
     private Long id;
+    private String title;
     private LocalDateTime date;
     private String text;
     private PostType type;

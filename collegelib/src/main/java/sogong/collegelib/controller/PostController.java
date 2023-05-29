@@ -37,8 +37,8 @@ public class PostController {
         return postService.findQaPost(bookId);
     }
 
-    @PostMapping("/{bookId}/buy/add")
-    public void buyPostAdd(@PathVariable Long bookId) {
+    @PostMapping("/board/buy/{bookId}/write")
+    public void buyPostAdd(@PathVariable Long bookId, @RequestBody Post post) {
 
     }
 
