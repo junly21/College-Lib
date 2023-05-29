@@ -14,7 +14,7 @@ const LoginForm = () => {
     form: auth.login,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user,
+    user: auth.user,
   }));
 
   // 인풋 변경 이벤트 핸들러
@@ -56,16 +56,16 @@ const LoginForm = () => {
     }
   }, [auth, authError, dispatch]);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate('/');
-  //     try {
-  //       localStorage.setItem('user', JSON.stringify(user));
-  //     } catch (e) {
-  //       console.log('로컬스토리지가 동작중이지 않습니다.');
-  //     }
-  //   }
-  // }, [navigate, user]);
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+      try {
+        localStorage.setItem('auth', JSON.stringify(auth));
+      } catch (e) {
+        console.log('로컬스토리지가 동작중이지 않습니다.');
+      }
+    }
+  }, [navigate, user]);
 
   return (
     <AuthForm

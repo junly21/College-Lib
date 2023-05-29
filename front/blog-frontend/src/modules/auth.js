@@ -58,6 +58,13 @@ function* logoutSaga() {
   }
 }
 
+///유저정보 랑 체크
+const TEMP_SET_USER = 'user/TEMP_SET_USER';
+const CHECK = 'user/CHECK';
+
+export const tempSetUser = createAction(TEMP_SET_USER, (user) => user);
+export const check = createAction(CHECK);
+
 const initialState = {
   register: {
     loginId: '',
@@ -72,6 +79,7 @@ const initialState = {
   auth: null,
   check: null,
   authError: null,
+  user: null,
 };
 
 const auth = handleActions(
@@ -112,6 +120,12 @@ const auth = handleActions(
       auth: null,
       authError: null,
     }),
+    [TEMP_SET_USER]: (state, { payload: user }) => ({
+      ...state,
+      user, // 사용자 정보 설정
+    }),
+
+    [CHECK]: (state) => state, // check 액션이 디스패치되었을 때는 상태 그대로 유지
   },
   initialState,
 );
