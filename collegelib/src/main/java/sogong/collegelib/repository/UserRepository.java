@@ -28,9 +28,9 @@ public class UserRepository {
         return em.createQuery("select m from User m", User.class)
                 .getResultList();
     }
-    public List<User> findByName(String name) {
-        return em.createQuery("select m from User m where m.username = :username", User.class)
-                .setParameter("username", name)
+    public List<User> findByName(String login_id) {
+        return em.createQuery("select m from User m where m.login_id = :login_id", User.class)
+                .setParameter("login_id", login_id)
                 .getResultList();
     }
 }
