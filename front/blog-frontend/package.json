@@ -13,10 +13,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
-<<<<<<< HEAD:blog-frontend/package.json
-=======
     "react-script": "^2.0.5",
->>>>>>> bff4f82a33b7015014c40cc539d0236dc03d7560:front/blog-frontend/package.json
     "react-scripts": "^5.0.1",
     "redux": "^4.2.1",
     "redux-actions": "^3.0.0",
