@@ -55,14 +55,9 @@ const RegisterForm = () => {
 
   // 회원가입 성공 / 실패 처리
   useEffect(() => {
-    if (auth) {
-      // 계정명이 이미 존재할 때
-      if (auth && auth.message) {
-        setError(auth.message);
-        return;
-      }
+    if (auth && auth.message) {
       // 기타 이유
-      setError('회원가입 실패');
+      setError(auth && auth.message);
       return;
     }
 
