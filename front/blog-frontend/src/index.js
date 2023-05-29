@@ -21,7 +21,6 @@ function loadUser() {
     const user = localStorage.getItem('user');
     if (!user) return;
     store.dispatch(tempSetUser(JSON.parse(user)));
-    store.dispatch(check());
   } catch (e) {
     console.log('로컬스토리지 오류 감지');
   }
