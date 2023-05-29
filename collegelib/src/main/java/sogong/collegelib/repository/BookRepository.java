@@ -24,7 +24,7 @@ public class BookRepository {
     }
 
     public List<Book> findByKeyword(String keyword) {
-        List<Book> books = em.createQuery("select b from Book b where b.name like %:keyword%")
+        List<Book> books = em.createQuery("select b from Book b where b.title like %:keyword%")
                 .getResultList();
 
         return books;
