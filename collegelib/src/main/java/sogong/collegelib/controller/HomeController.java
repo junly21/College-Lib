@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import sogong.collegelib.Service.BookService;
 import sogong.collegelib.domain.Book;
 import sogong.collegelib.domain.User;
+import sogong.collegelib.exception.user.loginException.NotLoginUserException;
 import sogong.collegelib.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -25,19 +26,19 @@ public class HomeController {
     private final BookService bookService;
 
     @GetMapping("/")
-    public ResponseEntity<?> homeLogin(HttpServletRequest request) {
+    public User homeLogin(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
-            return ResponseEntity.ok("home");
+            throw new NotLoginUserException();
         }
 
         User loginUser = (User)session.getAttribute("loginUser");
         if (loginUser == null) {
-            return ResponseEntity.ok("home");
+            throw new NotLoginUserException();
         }
 
         // 필요한 데이터를 담은 DTO 또는 VO 객체를 생성하여 반환
-        return ResponseEntity.ok("home");
+        return loginUser;
     }
 
     @GetMapping("/search")
