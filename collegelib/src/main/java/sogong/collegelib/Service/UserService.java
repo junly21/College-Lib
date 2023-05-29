@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sogong.collegelib.domain.User;
+import sogong.collegelib.exception.user.registerExceotion.DuplicateLoginIdException;
 import sogong.collegelib.repository.UserRepository;
 
 import java.util.List;
@@ -30,9 +31,9 @@ public class UserService {
     }
     private void validateDuplicateMember(User user) {
         List<User> findMembers =
-                userRepository.findByName(user.getUsername());
+                userRepository.findByName(user.getLoginId());
         if (!findMembers.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
+            throw new DuplicateLoginIdException();
         }
     }
     /**

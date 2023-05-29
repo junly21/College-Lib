@@ -31,15 +31,15 @@ public class UserController {
 //        if(bindingResult.hasErrors()){
 //            response.sendError(409);
 //        }
-        if(registerdto.getLoginId() == null){  //회원가입 폼에서 입력하지 않은 파트가 있다면 예외 처리
-            throw new NullLoginIdException();
-        }
-        else if(registerdto.getUsername() == null) {
-            throw new NullUsernameException();
-        }
-        else if(registerdto.getPassword() == null) {
-            throw new NullPasswordException();
-        }
+//        if(registerdto.getLoginId() == null){  //회원가입 폼에서 입력하지 않은 파트가 있다면 예외 처리
+//            throw new NullLoginIdException();
+//        }
+//        else if(registerdto.getUsername() == null) {
+//            throw new NullUsernameException();
+//        }
+//        else if(registerdto.getPassword() == null) {
+//            throw new NullPasswordException();
+//        }
         //중복되는 아이디는 어떻게 처리??
 
 
@@ -67,12 +67,12 @@ public class UserController {
                       HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("로그인성공");
 
-        if(loginDto.getLoginId() == null) {
-            throw new NullLoginIdException();
-        }
-        else if(loginDto.getPassword() == null) {
-            throw new NullPasswordException();
-        }
+//        if(loginDto.getLoginId() == null) {
+//            throw new NullLoginIdException();
+//        }
+//        else if(loginDto.getPassword() == null) {
+//            throw new NullPasswordException();
+//        }
 
 
 
