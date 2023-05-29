@@ -70,6 +70,7 @@ const initialState = {
     password: '',
   },
   auth: null,
+  check: null,
   authError: null,
 };
 
@@ -84,10 +85,10 @@ const auth = handleActions(
       [form]: initialState[form],
     }),
     // 회원가입 성공
-    [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
+    [REGISTER_SUCCESS]: (state, { payload: check }) => ({
       ...state,
       authError: null,
-      auth,
+      check,
     }),
     // 회원가입 실패
     [REGISTER_FAILURE]: (state, { payload: error }) => ({
@@ -103,6 +104,7 @@ const auth = handleActions(
     // 로그인 실패
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
+      check: null,
       authError: error,
     }),
     [LOGOUT]: (state) => ({

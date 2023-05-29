@@ -8,10 +8,11 @@ import { useNavigate } from 'react-router-dom';
 const RegisterForm = () => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError, check } = useSelector(({ auth, user }) => ({
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
+    check: auth.check,
     user: user.user,
   }));
   const navigate = useNavigate();
@@ -55,18 +56,18 @@ const RegisterForm = () => {
 
   // 회원가입 성공 / 실패 처리
   useEffect(() => {
-    if (auth && auth.message) {
-      setError(auth.message);
+    if (check && check.message) {
+      setError(check.message);
       return;
     }
 
-    if (auth) {
+    if (check) {
       console.log('회원가입 성공');
-      console.log(auth);
+      console.log(check);
       //dispatch(check());
       navigate('/login');
     }
-  }, [auth, authError /*, dispatch*/, navigate]);
+  }, [check /*, dispatch*/, navigate]);
 
   // user 값이 잘 설정되었는지 확인
   // useEffect(() => {
