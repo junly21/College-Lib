@@ -30,6 +30,6 @@ public class Post {
     @JoinColumn(name = "BOOK_ID")
     private Book book;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> answers = new ArrayList<>();
+//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//    private List<Comment> answers = new ArrayList<>();
 }
