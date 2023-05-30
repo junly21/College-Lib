@@ -29,4 +29,15 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", loginId='" + loginId + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
