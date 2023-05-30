@@ -101,11 +101,11 @@ public class PostController {
         User loginUser = (User) session.getAttribute("loginUser");
 
         Post post = new Post();
-        post.setText(postDto.getText());
+        post.setBody(postDto.getBody());
         post.setTitle(postDto.getTitle());
         post.setDate(LocalDateTime.now());
         post.setBook(book);
-        post.setType(PostType.BUY);
+        post.setTag(PostType.BUY);
         post.setUser(loginUser);
 
         postService.savePost(post);
@@ -118,11 +118,11 @@ public class PostController {
         User loginUser = (User) session.getAttribute("loginUser");
 
         Post post = new Post();
-        post.setText(postDto.getText());
+        post.setBody(postDto.getBody());
         post.setTitle(postDto.getTitle());
         post.setDate(LocalDateTime.now());
         post.setBook(book);
-        post.setType(PostType.SELL);
+        post.setTag(PostType.SELL);
         post.setUser(loginUser);
 
         postService.savePost(post);
@@ -135,11 +135,11 @@ public class PostController {
         User loginUser = (User) session.getAttribute("loginUser");
 
         Post post = new Post();
-        post.setText(postDto.getText());
+        post.setBody(postDto.getBody());
         post.setTitle(postDto.getTitle());
         post.setDate(LocalDateTime.now());
         post.setBook(book);
-        post.setType(PostType.QA);
+        post.setTag(PostType.QA);
         post.setUser(loginUser);
 
         postService.savePost(post);
