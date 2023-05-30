@@ -17,10 +17,10 @@ public class Post {
     @Id
     @GeneratedValue
     private Long id;
+    private String title;
     private LocalDateTime date;
     private String text;
     private PostType type;
-    private boolean trade;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")

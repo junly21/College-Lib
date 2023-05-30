@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import sogong.collegelib.domain.Book;
 import sogong.collegelib.domain.Post;
 
+import java.util.List;
+
 @Repository
 public class BookRepository {
 
@@ -19,5 +21,12 @@ public class BookRepository {
 
     public Book findOne(Long id) {
         return em.find(Book.class, id);
+    }
+
+    public List<Book> findByKeyword(String keyword) {
+        List<Book> books = em.createQuery("select b from Book b where b.name like %:keyword%")
+                .getResultList();
+
+        return books;
     }
 }

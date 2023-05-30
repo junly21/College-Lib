@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sogong.collegelib.exception.ErrorResult;
 import sogong.collegelib.exception.user.homeExaception.NullSearchException;
 import sogong.collegelib.exception.user.loginException.NotExistUserException;
+import sogong.collegelib.exception.user.loginException.NotLoginUserException;
 import sogong.collegelib.exception.user.loginException.NotMatchUserException;
 import sogong.collegelib.exception.user.registerExceotion.*;
 
@@ -61,5 +62,11 @@ public class UserExControllerAdvice {   //http header 에 accept 가 application
     @ExceptionHandler(NotMatchUserException.class)
     public ErrorResult notMatchUserExHandle(){
         return new ErrorResult("notMatchUserInLogin", "아이디와 비밀번호가 일치하지 않습니다.");
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(NotLoginUserException.class)
+    public ErrorResult notLoginUserExhandle() {
+        return new ErrorResult("notLoginUser", "로그인을 하지 않은 유저입니다.");
     }
 }

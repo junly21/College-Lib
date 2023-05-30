@@ -7,12 +7,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sogong.collegelib.Service.BookService;
+import sogong.collegelib.domain.Book;
 import sogong.collegelib.domain.User;
+import sogong.collegelib.exception.user.loginException.NotLoginUserException;
 import sogong.collegelib.repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -20,21 +23,47 @@ import sogong.collegelib.repository.UserRepository;
 public class HomeController {
 
     private final UserRepository userRepository;
+    private final BookService bookService;
 
     @GetMapping("/")
-    public ResponseEntity<?> homeLogin(@RequestParam String search, HttpServletRequest request) {
+    public User homeLogin(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
-            return ResponseEntity.ok("home");
+            throw new NotLoginUserException();
         }
 
         User loginUser = (User)session.getAttribute("loginUser");
         if (loginUser == null) {
-            return ResponseEntity.ok("home");
+            throw new NotLoginUserException();
         }
 
         // 필요한 데이터를 담은 DTO 또는 VO 객체를 생성하여 반환
-        return ResponseEntity.ok("home");
+        return loginUser;
     }
 
+    @GetMapping("/check")
+    public User check(HttpServletRequest request) {
+        System.out.println("check");
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            //throw new NotLoginUserException();
+            return null;
+        }
+
+        User loginUser = (User)session.getAttribute("loginUser");
+        if (loginUser == null) {
+            //throw new NotLoginUserException();
+            return null;
+        }
+
+        // 필요한 데이터를 담은 DTO 또는 VO 객체를 생성하여 반환
+        System.out.println(loginUser.getLoginId());
+        System.out.println(loginUser.getPassword());
+        return loginUser;
+    }
+
+    @GetMapping("/search")
+    public List<Book> searchBook(@RequestBody String keyword) {
+       return bookService.findBooksByKeyword(keyword);
+    }
 }
