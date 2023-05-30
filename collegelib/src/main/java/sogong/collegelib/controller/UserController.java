@@ -27,7 +27,7 @@ public class UserController {
 
 
     @PostMapping(value = "/register")
-    public User createForm(@RequestBody @Valid Registerdto registerdto, BindingResult bindingResult, HttpServletResponse response) throws IOException {
+    public UserDto createForm(@RequestBody @Valid Registerdto registerdto, BindingResult bindingResult, HttpServletResponse response) throws IOException {
         System.out.println("회원가입성공");
 //        if(bindingResult.hasErrors()){
 //            response.sendError(409);
@@ -53,9 +53,14 @@ public class UserController {
         registerUser.setLoginId(registerdto.getLoginId());
         registerUser.setPassword(registerdto.getPassword());
 
+        UserDto user = new UserDto();
+        user.setLoginId(registerdto.getLoginId());
+        user.setPassword(registerdto.getPassword());
+        user.setUsername(registerdto.getUsername());
+
         userService.join(registerUser);
         //json형식으로 login ID , password, 이름
-        return registerUser;
+        return user;
     }
 
 //    @PostMapping(value = "/check")
