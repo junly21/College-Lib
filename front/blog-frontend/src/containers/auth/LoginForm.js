@@ -129,7 +129,7 @@ const LoginForm = () => {
     }
     if (auth) {
       console.log('로그인 성공');
-      dispatch(check({auth}));
+      dispatch(check());
     }
   }, [auth, authError, dispatch]);
 
