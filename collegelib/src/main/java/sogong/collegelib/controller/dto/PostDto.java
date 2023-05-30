@@ -1,9 +1,11 @@
 package sogong.collegelib.controller.dto;
 
 import lombok.Data;
+import sogong.collegelib.domain.PostType;
 
 @Data
 public class PostDto {
     private String title;
-    private String text;
+    private String body;
+    private PostType tag;
 }
