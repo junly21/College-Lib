@@ -165,16 +165,16 @@ const RegisterForm = () => {
   }, [auth /*, dispatch*/, navigate]);
 
   // user 값이 잘 설정되었는지 확인
-  useEffect(() => {
-    if (user) {
-      navigate('/'); // 홈 화면으로 이동
-      try {
-        localStorage.setItem('user', JSON.stringify(user));
-      } catch (e) {
-        console.log('localStorage is not working');
-      }
-    }
-  }, [navigate, user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate('/'); // 홈 화면으로 이동
+  //     try {
+  //       localStorage.setItem('user', JSON.stringify(user));
+  //     } catch (e) {
+  //       console.log('localStorage is not working');
+  //     }
+  //   }
+  // }, [navigate, user]);
 
   return (
     <AuthForm

@@ -41,6 +41,27 @@ public class HomeController {
         return loginUser;
     }
 
+    @GetMapping("/check")
+    public User check(HttpServletRequest request) {
+        System.out.println("check");
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            //throw new NotLoginUserException();
+            return null;
+        }
+
+        User loginUser = (User)session.getAttribute("loginUser");
+        if (loginUser == null) {
+            //throw new NotLoginUserException();
+            return null;
+        }
+
+        // 필요한 데이터를 담은 DTO 또는 VO 객체를 생성하여 반환
+        System.out.println(loginUser.getLoginId());
+        System.out.println(loginUser.getPassword());
+        return loginUser;
+    }
+
     @GetMapping("/search")
     public List<Book> searchBook(@RequestBody String keyword) {
        return bookService.findBooksByKeyword(keyword);
