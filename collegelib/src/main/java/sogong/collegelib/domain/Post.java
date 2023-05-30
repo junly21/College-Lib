@@ -19,8 +19,8 @@ public class Post {
     private Long id;
     private String title;
     private LocalDateTime date;
-    private String text;
-    private PostType type;
+    private String body;
+    private PostType tag;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
@@ -30,6 +30,6 @@ public class Post {
     @JoinColumn(name = "BOOK_ID")
     private Book book;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> answers = new ArrayList<>();
+//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//    private List<Comment> answers = new ArrayList<>();
 }

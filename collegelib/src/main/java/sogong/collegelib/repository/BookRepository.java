@@ -3,6 +3,7 @@ package sogong.collegelib.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import sogong.collegelib.domain.Book;
 import sogong.collegelib.domain.Post;
@@ -24,8 +25,12 @@ public class BookRepository {
     }
 
     public List<Book> findByKeyword(String keyword) {
-        List<Book> books = em.createQuery("select b from Book b where b.name like %:keyword%")
-                .getResultList();
+
+        System.out.println("keyword = " + keyword);
+
+        TypedQuery<Book> typedQuery = em.createQuery("select b from Book b where b.name like :keyword", Book.class);
+        typedQuery.setParameter("keyword", "%"+keyword+"%");
+        List<Book> books = typedQuery.getResultList();
 
         return books;
     }

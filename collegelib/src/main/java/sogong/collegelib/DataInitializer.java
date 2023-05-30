@@ -31,7 +31,11 @@ public class DataInitializer {
 
     @PostConstruct
     public void init() throws IOException {
+<<<<<<< HEAD
         FileInputStream file = new FileInputStream(new File("/Users/jaejoon/Downloads/전공서적 데이터.xlsx"));
+=======
+        FileInputStream file = new FileInputStream(new File("/Users/gimjaehyeon/Downloads/bookData.xlsx"));
+>>>>>>> c7f3a3d407de0919bdfd75b1fb048a401e351d2b
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet sheet = workbook.getSheetAt(0);
 

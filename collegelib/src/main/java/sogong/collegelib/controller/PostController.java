@@ -8,6 +8,7 @@ import sogong.collegelib.Service.BookService;
 import sogong.collegelib.Service.PostService;
 import sogong.collegelib.controller.dto.BookDto;
 import sogong.collegelib.controller.dto.PostDto;
+import sogong.collegelib.controller.dto.UserDtoTwo;
 import sogong.collegelib.domain.Book;
 import sogong.collegelib.domain.Post;
 import sogong.collegelib.domain.PostType;
@@ -95,20 +96,31 @@ public class PostController {
 
 
     @PostMapping("/board/buy/{bookId}/write")
-    public void writeBuyPost(@RequestBody PostDto postDto, @PathVariable Long bookId, HttpSession session) {
+    public PostDto writeBuyPost(@RequestBody PostDto postDto, @PathVariable Long bookId, HttpSession session) {
 
         Book book = bookService.findOne(bookId);
         User loginUser = (User) session.getAttribute("loginUser");
+        System.out.println("loginUser = " + loginUser.toString());
 
         Post post = new Post();
-        post.setText(postDto.getText());
+        post.setBody(postDto.getBody());
         post.setTitle(postDto.getTitle());
         post.setDate(LocalDateTime.now());
         post.setBook(book);
-        post.setType(PostType.BUY);
+        post.setTag(PostType.BUY);
         post.setUser(loginUser);
 
+        PostDto dto = new PostDto();
+        dto.setBody(postDto.getBody());
+        dto.setTitle(postDto.getTitle());
+        dto.setTag(null);
+        dto.setUser(new UserDtoTwo(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getUsername()));
+
         postService.savePost(post);
+
+        dto.setId(post.getId());
+
+        return dto;
     }
 
     @PostMapping("/board/sell/{bookId}/write")
@@ -118,11 +130,11 @@ public class PostController {
         User loginUser = (User) session.getAttribute("loginUser");
 
         Post post = new Post();
-        post.setText(postDto.getText());
+        post.setBody(postDto.getBody());
         post.setTitle(postDto.getTitle());
         post.setDate(LocalDateTime.now());
         post.setBook(book);
-        post.setType(PostType.SELL);
+        post.setTag(PostType.SELL);
         post.setUser(loginUser);
 
         postService.savePost(post);
@@ -135,11 +147,11 @@ public class PostController {
         User loginUser = (User) session.getAttribute("loginUser");
 
         Post post = new Post();
-        post.setText(postDto.getText());
+        post.setBody(postDto.getBody());
         post.setTitle(postDto.getTitle());
         post.setDate(LocalDateTime.now());
         post.setBook(book);
-        post.setType(PostType.QA);
+        post.setTag(PostType.QA);
         post.setUser(loginUser);
 
         postService.savePost(post);
