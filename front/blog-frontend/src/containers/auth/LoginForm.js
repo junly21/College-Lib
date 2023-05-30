@@ -128,7 +128,6 @@ const LoginForm = () => {
       return;
     }
     if (auth) {
-      console.log('로그인 성공');
       dispatch(check());
     }
   }, [auth, authError, dispatch]);
@@ -136,6 +135,7 @@ const LoginForm = () => {
   useEffect(() => {
     if (user) {
       navigate('/');
+      console.log('로그인 성공');
       try {
         localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {

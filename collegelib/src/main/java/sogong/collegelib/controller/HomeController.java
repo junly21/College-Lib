@@ -57,8 +57,7 @@ public class HomeController {
         }
 
         // 필요한 데이터를 담은 DTO 또는 VO 객체를 생성하여 반환
-        System.out.println(loginUser.getLoginId());
-        System.out.println(loginUser.getPassword());
+        System.out.println(loginUser);
         return loginUser;
     }
 
