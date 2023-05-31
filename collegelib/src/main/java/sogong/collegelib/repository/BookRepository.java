@@ -31,6 +31,8 @@ public class BookRepository {
         TypedQuery<Book> typedQuery = em.createQuery("select b from Book b where b.name like :keyword", Book.class);
         typedQuery.setParameter("keyword", "%"+keyword+"%");
         List<Book> books = typedQuery.getResultList();
+//        List<Book> books = em.createQuery("select b from Book b where b.title like %:keyword%")
+//                .getResultList();
 
         return books;
     }

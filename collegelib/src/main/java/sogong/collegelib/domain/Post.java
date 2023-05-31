@@ -20,7 +20,8 @@ public class Post {
     private String title;
     private LocalDateTime date;
     private String body;
-    private PostType tag;
+    private String tag;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
