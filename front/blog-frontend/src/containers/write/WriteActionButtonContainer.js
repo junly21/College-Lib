@@ -37,7 +37,7 @@ const WriteActionButtonsContainer = () => {
   useEffect(() => {
     if (post) {
       const { id } = post;
-      navigate(`/board/buy/2/${id}`);
+      navigate(`/2/${id}`);
     }
     if (postError) {
       console.log(postError);

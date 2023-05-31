@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import Button from '../common/Button';
 import palette from '../../lib/styles/palette';
-import SubInfo from '../common/SubInfo';
+import SubInfo from '../common/Subinfo';
 import Tags from '../common/Tags';
 import { Link } from 'react-router-dom';
 

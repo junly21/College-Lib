@@ -29,7 +29,7 @@ const App = () => {
         <Route path=":bookId" element={<BoardPage />} />
       </Route>
 
-      <Route path="/board/buy/2">
+      <Route path="/2">
         {/* <Route path=":bookId" element={<PostPage />} /> */}
         <Route path=":postId" element={<PostPage />} />
       </Route>
