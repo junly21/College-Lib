@@ -6,7 +6,7 @@ import lombok.Data;
 public class PostDto {
     private String title;
     private String body;
-    private String[] tag;
+    private String tag;
     private UserDtoTwo user;
     private Long id;
 }

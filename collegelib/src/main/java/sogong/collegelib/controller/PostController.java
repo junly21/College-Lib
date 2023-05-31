@@ -27,75 +27,52 @@ public class PostController {
     private final PostService postService;
     private final BookService bookService;
 
-    @GetMapping("/board/buy/{bookId}")
+    @GetMapping("/{bookId}/buy")
     public List<Post> getBuyBoard(@PathVariable Long bookId) {
         Book book = bookService.findOne(bookId);
         return book.getPosts();
     }
 
-    @GetMapping("/board/sell/{bookId}")
+    @GetMapping("/{bookId}/sell")
     public List<Post> getSellBoard(@PathVariable Long bookId) {
         Book book = bookService.findOne(bookId);
         return book.getPosts();
     }
 
-    @GetMapping("/board/qa/{bookId}")
+    @GetMapping("/{bookId}/qa")
     public List<Post> getQaBoard(@PathVariable Long bookId) {
         Book book = bookService.findOne(bookId);
         return book.getPosts();
     }
 
 
-    @GetMapping("/board/buy/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭
-    public Post getBuyPost(@PathVariable Long bookId, @PathVariable Long postId) {
+    @GetMapping("/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭
+    public PostDto getBuyPost(@PathVariable Long bookId, @PathVariable Long postId, HttpSession session) {
         Book book = bookService.findOne(bookId);
+        User loginUser = (User) session.getAttribute("loginUser");
+        System.out.println("loginUser = " + loginUser.toString());
 
         if(book == null){
             throw new NotExistBookException();
         }
 
         for (Post post : book.getPosts()) {
-            if(post.getId() == postId){
-                return post;
-            }
-        }
-        throw new NotExistPostException();
-    }
+            if(post.getId() == postId) {
 
-    @GetMapping("/board/sell/{bookId}/{postId}")  //팝니다 게시판에서 특정 게시글 클릭
-    public Post getSellPost(@PathVariable Long bookId, @PathVariable Long postId) {
-        Book book = bookService.findOne(bookId);
-
-        if(book == null){
-            throw new NotExistBookException();
-        }
-
-        for (Post post : book.getPosts()) {
-            if(post.getId() == postId){
-                return post;
-            }
-        }
-        throw new NotExistPostException();
-    }
-
-    @GetMapping("/board/qa/{bookId}/{postId}")  //Q&A 게시판에서 특정 게시글 클릭
-    public Post getQaPost(@PathVariable Long bookId, @PathVariable Long postId) {
-        Book book = bookService.findOne(bookId);
-
-        if(book == null){
-            throw new NotExistBookException();
-        }
-
-        for (Post post : book.getPosts()) {
-            if(post.getId() == postId){
-                return post;
+                PostDto dto = new PostDto();
+                dto.setBody(post.getBody());
+                dto.setTitle(post.getTitle());
+                dto.setTag(post.getTag());
+                dto.setId(post.getId());
+                dto.setUser(new UserDtoTwo(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getUsername()));
+                return dto;
             }
         }
         throw new NotExistPostException();
     }
 
 
-    @PostMapping("/board/buy/{bookId}/write")
+    @PostMapping("/{bookId}/write")
     public PostDto writeBuyPost(@RequestBody PostDto postDto, @PathVariable Long bookId, HttpSession session) {
 
         Book book = bookService.findOne(bookId);
@@ -107,13 +84,13 @@ public class PostController {
         post.setTitle(postDto.getTitle());
         post.setDate(LocalDateTime.now());
         post.setBook(book);
-        post.setTag(PostType.BUY);
+        post.setTag(postDto.getTag());
         post.setUser(loginUser);
 
         PostDto dto = new PostDto();
         dto.setBody(postDto.getBody());
         dto.setTitle(postDto.getTitle());
-        dto.setTag(null);
+        dto.setTag(postDto.getTag());
         dto.setUser(new UserDtoTwo(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getUsername()));
 
         postService.savePost(post);
@@ -121,39 +98,5 @@ public class PostController {
         dto.setId(post.getId());
 
         return dto;
-    }
-
-    @PostMapping("/board/sell/{bookId}/write")
-    public void writeSellPost(@RequestBody PostDto postDto, @PathVariable Long bookId, HttpSession session) {
-
-        Book book = bookService.findOne(bookId);
-        User loginUser = (User) session.getAttribute("loginUser");
-
-        Post post = new Post();
-        post.setBody(postDto.getBody());
-        post.setTitle(postDto.getTitle());
-        post.setDate(LocalDateTime.now());
-        post.setBook(book);
-        post.setTag(PostType.SELL);
-        post.setUser(loginUser);
-
-        postService.savePost(post);
-    }
-
-    @PostMapping("/board/qa/{bookId}/write")
-    public void writeQaPost(@RequestBody PostDto postDto, @PathVariable Long bookId, HttpSession session) {
-
-        Book book = bookService.findOne(bookId);
-        User loginUser = (User) session.getAttribute("loginUser");
-
-        Post post = new Post();
-        post.setBody(postDto.getBody());
-        post.setTitle(postDto.getTitle());
-        post.setDate(LocalDateTime.now());
-        post.setBook(book);
-        post.setTag(PostType.QA);
-        post.setUser(loginUser);
-
-        postService.savePost(post);
     }
 }
