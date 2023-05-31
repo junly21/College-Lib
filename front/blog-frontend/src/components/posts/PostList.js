@@ -18,15 +18,10 @@ const WritePostButtonWrapper = styled.div`
 `;
 
 const PostItemBlock = styled.div`
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  border-bottom: 1px solid ${palette.gray[4]};
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   /* 맨 위 포스트는 padding-top 없음 */
-  &:first-child {
-    padding-top: 0;
-  }
-  & + & {
-    border-top: 1px solid ${palette.gray[2]};
-  }
 
   h2 {
     font-size: 2rem;
@@ -62,14 +57,9 @@ const PostItemBlock = styled.div`
 const PostItem = () => {
   return (
     <PostItemBlock>
-      <h1>제목</h1>
-      <SubInfo>
-        <span>
-          <b>usernameexample</b>
-        </span>
-        <span>{new Date().toLocaleDateString()}</span>
-      </SubInfo>
-      <Tags tags={'태그예시'} />
+      <h3>제목</h3>
+      <SubInfo username={'usernametest'} publishedDate={new Date()}></SubInfo>
+      {/* <Tags tags={'태그예시'} />  태그는 url로 구분할거니까 제외요*/}
       <p> 포스트 내용 일부분 예시 </p>
     </PostItemBlock>
   );

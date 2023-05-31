@@ -23,9 +23,7 @@ const SubInfo = ({ username, publishedDate, hasMarginTop }) => {
   return (
     <SubInfoBlock hasMarginTop={hasMarginTop}>
       <span>
-        <b>
-          <Link to={`/@${username}`}>{username}</Link>
-        </b>
+        <b>{username}</b>
       </span>
       <span>{new Date(publishedDate).toLocaleDateString()}</span>
     </SubInfoBlock>

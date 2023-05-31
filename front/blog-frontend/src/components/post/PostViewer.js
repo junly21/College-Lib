@@ -95,13 +95,11 @@ const PostViewer = ({ post, error, loading }) => {
     <PostViewerBlock>
       <PostHead>
         <h3>{title}</h3>
-        <SubInfo>
-          <span>
-            <b>{user.username}</b>
-          </span>
-          <span>{new Date().toLocaleDateString()}</span>
-        </SubInfo>
-        <Tags>{tags}</Tags>
+        <SubInfo
+          username={user.username}
+          publishedDate={publishedDate}
+        ></SubInfo>
+        <Tags tags={tags}></Tags>
       </PostHead>
       <PostContent dangerouslySetInnerHTML={{ __html: body }} />
     </PostViewerBlock>

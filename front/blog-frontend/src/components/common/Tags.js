@@ -16,15 +16,7 @@ const TagsBlock = styled.div`
 `;
 
 const Tags = ({ tags }) => {
-  return (
-    <TagsBlock>
-      {tags.map((tag) => (
-        <Link className="tag" to={`/?tag=${tag}`} key={tag}>
-          #{tag}
-        </Link>
-      ))}
-    </TagsBlock>
-  );
+  return <TagsBlock>{tags}</TagsBlock>;
 };
 
 export default Tags;
