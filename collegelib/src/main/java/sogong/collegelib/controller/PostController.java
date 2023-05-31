@@ -84,6 +84,7 @@ public class PostController {
         post.setTitle(postDto.getTitle());
         post.setDate(LocalDateTime.now());
         post.setBook(book);
+
         post.setTag(postDto.getTag());
         post.setUser(loginUser);
 
@@ -93,10 +94,11 @@ public class PostController {
         dto.setTag(postDto.getTag());
         dto.setUser(new UserDtoTwo(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getUsername()));
 
+
+
         postService.savePost(post);
-
-        dto.setId(post.getId());
-
         return dto;
     }
+
+
 }

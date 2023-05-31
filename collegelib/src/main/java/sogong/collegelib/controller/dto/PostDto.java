@@ -1,6 +1,7 @@
 package sogong.collegelib.controller.dto;
 
 import lombok.Data;
+import sogong.collegelib.domain.PostType;
 
 @Data
 public class PostDto {
@@ -9,4 +10,5 @@ public class PostDto {
     private String tag;
     private UserDtoTwo user;
     private Long id;
+
 }

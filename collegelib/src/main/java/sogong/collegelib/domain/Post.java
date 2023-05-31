@@ -22,6 +22,7 @@ public class Post {
     private String body;
     private String tag;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
