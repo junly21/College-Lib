@@ -93,10 +93,8 @@ public class PostController {
         dto.setTitle(postDto.getTitle());
         dto.setTag(postDto.getTag());
         dto.setUser(new UserDtoTwo(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getUsername()));
-
-
-
-        postService.savePost(post);
+        Long postId = postService.savePost(post);
+        dto.setId(postId);
         return dto;
     }
 

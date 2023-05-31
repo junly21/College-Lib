@@ -14,8 +14,9 @@ public class PostRepository {
 
     @PersistenceContext
     private EntityManager em;
-    public void save(Post post) {
+    public Long save(Post post) {
         em.persist(post);
+        return post.getId();
     }
     public Post findOne(Long id) {
         return em.find(Post.class, id);
