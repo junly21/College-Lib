@@ -18,7 +18,7 @@ const TagForm = styled.form`
   border-radius: 4px;
   overflow: hidden;
   display: flex;
-  width: 256px;
+  width: 180px;
   border: 1px solid ${palette.gray[9]}; /* 스타일 초기화 */
   input,
   button {
@@ -59,38 +59,106 @@ const TagListBlock = styled.div`
   margin-top: 0.5rem;
 `;
 
-// React.memo를 사용하여 tag 값이 바뀔 때만 리렌더링되도록 처리
+// // React.memo를 사용하여 tag 값이 바뀔 때만 리렌더링되도록 처리
+// const TagItem = React.memo(({ tag, onRemove }) => (
+//   <Tag onClick={() => onRemove(tag)}>#{tag}</Tag>
+// ));
+
+// // React.memo를 사용하여 tags 값이 바뀔 때만 리렌더링되도록 처리
+// const TagList = React.memo(({ tags, onRemove }) => (
+//   <TagListBlock>
+//     {tags.map((tag) => (
+//       <TagItem key={tag} tag={tag} onRemove={onRemove} />
+//     ))}
+//   </TagListBlock>
+// ));
+
+// const TagBox = ({ tags, onChangeTags }) => {
+//   const [input, setInput] = useState('');
+//   const [localTags, setLocalTags] = useState([]);
+
+//   const insertTag = useCallback(
+//     (tag) => {
+//       if (!tag) return;
+//       if (localTags.includes(tag)) return;
+//       const nextTags = [...localTags, tag];
+//       setLocalTags(nextTags);
+//       onChangeTags(nextTags);
+//     },
+//     [localTags, onChangeTags],
+//   );
+
+//   const onRemove = useCallback(
+//     (tag) => {
+//       const nextTags = localTags.filtered((t) => t !== tag);
+//       setLocalTags(nextTags);
+//       onChangeTags(nextTags);
+//     },
+//     [localTags, onChangeTags],
+//   );
+
+//   const onChange = useCallback((e) => {
+//     setInput(e.target.value);
+//   }, []);
+
+//   const onSubmit = useCallback(
+//     (e) => {
+//       e.preventDefault();
+//       insertTag(input.trim()); // 앞뒤 공백 없앤 후 등록
+//       setInput(''); // input 초기화
+//     },
+//     [input, insertTag],
+//   );
+
+//   useEffect(() => {
+//     setLocalTags(tags);
+//   }, [tags]);
+
+//   return (
+//     <TagBoxBlock>
+//       <h4>태그</h4>
+//       <TagForm onSubmit={onSubmit}>
+//         <input
+//           placeholder="태그를 입력하세요"
+//           value={input}
+//           onChange={onChange}
+//         />
+//         <button type="submit">추가</button>
+//       </TagForm>
+//       <TagList tags={localTags} onRemove={onRemove} />
+//     </TagBoxBlock>
+//   );
+// };
+
+// export default TagBox;
+
 const TagItem = React.memo(({ tag, onRemove }) => (
   <Tag onClick={() => onRemove(tag)}>#{tag}</Tag>
 ));
 
-// React.memo를 사용하여 tags 값이 바뀔 때만 리렌더링되도록 처리
 const TagList = React.memo(({ tags, onRemove }) => (
-  <TagListBlock>
-    {tags.map((tag) => (
-      <TagItem key={tag} tag={tag} onRemove={onRemove} />
-    ))}
-  </TagListBlock>
+  <TagListBlock>{tags}</TagListBlock>
 ));
 
 const TagBox = ({ tags, onChangeTags }) => {
   const [input, setInput] = useState('');
   const [localTags, setLocalTags] = useState([]);
+  const options = ['삽니다', '팝니다', '질문'];
 
   const insertTag = useCallback(
     (tag) => {
       if (!tag) return;
       if (localTags.includes(tag)) return;
-      const nextTags = [...localTags, tag];
-      setLocalTags(nextTags);
-      onChangeTags(nextTags);
+      const Tags = tag;
+      setLocalTags(Tags);
+      onChangeTags(Tags);
     },
     [localTags, onChangeTags],
   );
 
   const onRemove = useCallback(
     (tag) => {
-      const nextTags = localTags.filtered((t) => t !== tag);
+      const nextTags = localTags.filter((t) => t !== tag);
       setLocalTags(nextTags);
       onChangeTags(nextTags);
     },
@@ -104,8 +172,8 @@ const TagBox = ({ tags, onChangeTags }) => {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      insertTag(input.trim()); // 앞뒤 공백 없앤 후 등록
-      setInput(''); // input 초기화
+      insertTag(input.trim());
+      setInput('');
     },
     [input, insertTag],
   );
@@ -118,11 +186,14 @@ const TagBox = ({ tags, onChangeTags }) => {
     <TagBoxBlock>
       <h4>태그</h4>
       <TagForm onSubmit={onSubmit}>
-        <input
-          placeholder="태그를 입력하세요"
-          value={input}
-          onChange={onChange}
-        />
+        <select value={input} onChange={onChange}>
+          <option value="">태그를 선택하세요</option>
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
         <button type="submit">추가</button>
       </TagForm>
       <TagList tags={localTags} onRemove={onRemove} />

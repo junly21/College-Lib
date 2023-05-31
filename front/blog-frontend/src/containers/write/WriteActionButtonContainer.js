@@ -36,8 +36,8 @@ const WriteActionButtonsContainer = () => {
   // 성공 혹은 실패시 할 작업
   useEffect(() => {
     if (post) {
-      const { id, user } = post;
-      navigate(`/@${user.loginId}/${id}`);
+      const { id } = post;
+      navigate(`/board/buy/${id}`);
     }
     if (postError) {
       console.log(postError);
