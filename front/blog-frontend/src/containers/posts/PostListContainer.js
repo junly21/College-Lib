@@ -21,7 +21,7 @@ const PostListContainer = () => {
     const tag = searchParams.get('tag');
     // page가 없으면 1을 기본값으로 사용
     const page = parseInt(searchParams.get('page'), 10) || 1;
-    dispatch(listPosts({ tag, username, page }));
+    dispatch(listPosts({ tag, username, page })); //
   }, [dispatch, searchParams, username]);
 
   return (
