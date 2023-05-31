@@ -29,9 +29,11 @@ const App = () => {
         <Route path=":bookId" element={<BoardPage />} />
       </Route>
 
-      <Route path="/write">
-        <Route path=":bookId" element={<PostPage />} />
+      <Route path="/board/buy/2">
+        {/* <Route path=":bookId" element={<PostPage />} /> */}
+        <Route path=":postId" element={<PostPage />} />
       </Route>
+      {/* 여기 board/buy/2/write에서 navigate */}
 
       <Route path="/postlist" element={<PostListPage />} />
       {/* 
