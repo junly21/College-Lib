@@ -137,7 +137,7 @@ public class PostController {
     }
 
     @DeleteMapping("/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭
-    public void getBuyPost(@PathVariable Long bookId, @PathVariable Long postId, HttpSession session) {
+    public void deletePost(@PathVariable Long bookId, @PathVariable Long postId, HttpSession session) {
         Book book = bookService.findOne(bookId);
         User loginUser = (User) session.getAttribute("loginUser");
         System.out.println("loginUser = " + loginUser.toString());
