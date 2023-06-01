@@ -15,8 +15,8 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public void savePost(Post post) {
-        postRepository.save(post);
+    public Long savePost(Post post) {
+        return postRepository.save(post);
     }
 
     public Post findOne(Long postId) {
