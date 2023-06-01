@@ -23,6 +23,11 @@ public class PostService {
         return postRepository.findOne(postId);
     }
 
+    @Transactional
+    public void deleteById(Long postId){
+        postRepository.deleteById(postId);
+    }
+
     public List<Post> findBuyPost(Long bookId) {
         return postRepository.findBuyAll(bookId);
     }
