@@ -10,6 +10,9 @@ const HomePage = () => {
   const goWrite = () => {
     navigate('/write');
   };
+  const goPostlist = () => {
+    navigate('/postlist');
+  };
   return (
     <>
       <HeaderContainer />
@@ -17,6 +20,9 @@ const HomePage = () => {
 
       <div>
         <Button onClick={goWrite}>글쓰기</Button>
+      </div>
+      <div>
+        <Button onClick={goPostlist}>글목록(일단buy만)</Button>
       </div>
     </>
   );

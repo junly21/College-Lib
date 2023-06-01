@@ -4,21 +4,20 @@ import Responsive from '../common/Responsive';
 import Button from '../common/Button';
 import palette from '../../lib/styles/palette';
 import SubInfo from '../common/Subinfo';
-import Tags from '../common/Tags';
 import { Link } from 'react-router-dom';
 
 const PostListBlock = styled(Responsive)`
-  margin-top: 3rem;
+  margin-top: 2rem;
 `;
 
 const WritePostButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 `;
 
 const PostItemBlock = styled.div`
-  border-bottom: 1px solid ${palette.gray[4]};
+  border-top: 1px solid ${palette.red[1]};
   padding-top: 1rem;
   padding-bottom: 1rem;
   /* 맨 위 포스트는 padding-top 없음 */
@@ -36,14 +35,40 @@ const PostItemBlock = styled.div`
   }
 `;
 
+const Title = styled.h3`
+  font-weight: bold;
+  font-size: 1.5rem;
+`;
+
+const TagsBlock = styled.div`
+  margin-top: 0.5rem;
+  .tag {
+    display: inline-block;
+    color: ${palette.gray[5]};
+    text-decoration: none;
+    margin-right: 0.5rem;
+    &:hover {
+      color: ${palette.cyan[6]};
+    }
+  }
+`;
+
+const Tags = ({ tags }) => {
+  return (
+    <TagsBlock>
+      <span className="tag">#{tags}</span>
+    </TagsBlock>
+  );
+};
+
 const PostItem = ({ post }) => {
-  const { publishedDate, username, tags, title, body, id } = post;
+  const { date, username, tags, title, body, id } = post;
   return (
     <PostItemBlock>
-      <h3>제목</h3>
-
-      <Link to={`/2/${id}`}>{title}</Link>
-      <SubInfo username={username} publishedDate={new Date(publishedDate)} />
+      <Link to={`/2/${id}`}>
+        <Title>{title}</Title>
+      </Link>
+      <SubInfo username={username} publishedDate={new Date(date)} />
       <Tags tags={tags} />
       <p>{body}</p>
     </PostItemBlock>

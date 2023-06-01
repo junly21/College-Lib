@@ -23,7 +23,7 @@ const PostHead = styled.div`
 
 const SubInfo = styled.div`
   margin-top: 1rem;
-  border: 1px solid ${palette.red[1]};
+  // border: 1px solid ${palette.red[1]};
   color: ${palette.gray[6]};
 
   span+span: before {
@@ -95,10 +95,12 @@ const PostViewer = ({ post, error, loading }) => {
     <PostViewerBlock>
       <PostHead>
         <h3>{title}</h3>
-        <SubInfo
-          username={user.username}
-          publishedDate={publishedDate}
-        ></SubInfo>
+        <SubInfo>
+          <span>
+            <b>{user.username}</b>
+          </span>
+          <span>{new Date(publishedDate).toLocaleDateString()}</span>
+        </SubInfo>
         <Tags tags={tags}></Tags>
       </PostHead>
       <PostContent dangerouslySetInnerHTML={{ __html: body }} />
