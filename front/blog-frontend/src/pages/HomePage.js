@@ -11,7 +11,7 @@ const HomePage = () => {
     navigate('/write');
   };
   const goPostlist = () => {
-    navigate('/postlist');
+    navigate('/2/buy');
   };
   return (
     <>

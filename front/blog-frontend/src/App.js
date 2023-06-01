@@ -35,12 +35,7 @@ const App = () => {
       </Route>
       {/* 여기 board/buy/2/write에서 navigate */}
 
-      <Route path="/postlist" element={<PostListPage />} />
-      {/* 
-      <Route path="/@:username">
-        <Route index element={<HomePage />} />
-        <Route path=":postId" element={<PostPage />} />
-      </Route> */}
+      <Route path="/2/buy" element={<PostListPage />} />
     </Routes>
   );
 };
