@@ -32,7 +32,7 @@ public class DataInitializer {
     @PostConstruct
     public void init() throws IOException {
 
-        FileInputStream file = new FileInputStream(new File("/Users/jeong-uiyeob/Downloads/bookData.xlsx"));
+        FileInputStream file = new FileInputStream(new File("/Users/gimjaehyeon/Downloads/bookData.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet sheet = workbook.getSheetAt(0);
 
