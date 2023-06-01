@@ -23,21 +23,21 @@ public class PostRepository {
     }
 
     public List<Post> findBuyAll(Long bookId) {
-        return em.createQuery("select m from Post m JOIN m.Book.b on b.bookId = :bookId where m.Status = 'BUY'",
+        return em.createQuery("select m from Post m JOIN m.Book.b on b.id = :bookId where m.tags = '삽니다'",
                         Post.class)
                 .setParameter("bookId", bookId)
                 .getResultList();
     }
 
     public List<Post> findSellAll(Long bookId) {
-        return em.createQuery("select m from Post m JOIN m.Book.b on b.bookId = :bookId where m.Status = 'SELL'",
+        return em.createQuery("select m from Post m JOIN m.Book.b on b.id = :bookId where m.tags = '팝니다'",
                         Post.class)
                 .setParameter("bookId", bookId)
                 .getResultList();
     }
 
     public List<Post> findQaAll(Long bookId) {
-        return em.createQuery("select m from Post m JOIN m.Book.b on b.bookId = :bookId where m.Status = 'QA'",
+        return em.createQuery("select m from Post m JOIN m.Book.b on b.id = :bookId where m.tags = '질문'",
                         Post.class)
                 .setParameter("bookId", bookId)
                 .getResultList();
