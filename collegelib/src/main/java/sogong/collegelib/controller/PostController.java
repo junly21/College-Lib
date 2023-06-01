@@ -146,7 +146,7 @@ public class PostController {
             throw new NotExistBookException();
         }
 
-        postService.findOne(postId);
+        postService.deleteById(postId);
         throw new NotExistPostException();
     }
 
