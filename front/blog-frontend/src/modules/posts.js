@@ -10,7 +10,7 @@ const [LIST_POSTS, LIST_POSTS_SUCCESS, LIST_POSTS_FAILURE] =
 
 export const listPosts = createAction(
   LIST_POSTS,
-  ({ tag, username, page }) => ({ tag, username, page }), //태그 이름 페이지는 뺄수도있ㅇ고. api에서 같이 뺴야함.
+  ({ tag, user, page }) => ({ tag, user, page }), //태그 이름 페이지는 뺄수도있ㅇ고. api에서 같이 뺴야함.
 );
 
 const listPostsSaga = createRequestSaga(LIST_POSTS, postsAPI.listPosts);
