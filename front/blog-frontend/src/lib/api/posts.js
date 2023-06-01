@@ -12,3 +12,5 @@ export const readPost = (id) => client.get(`/2/${id}`); //BookId/postId로 리�
 export const listPosts = () => {
   return client.get('/2/buy');
 };
+
+export const removePost = (id) => client.delete(`/2/${id}`);
