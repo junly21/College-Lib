@@ -8,10 +8,7 @@ import { takeLatest } from 'redux-saga/effects';
 const [LIST_POSTS, LIST_POSTS_SUCCESS, LIST_POSTS_FAILURE] =
   createRequestActionTypes('posts/LIST_POSTS'); //포스트 목록 성공 실패 상태
 
-export const listPosts = createAction(
-  LIST_POSTS,
-  ({ tag, user, page }) => ({ tag, user, page }), //태그 이름 페이지는 뺄수도있ㅇ고. api에서 같이 뺴야함.
-);
+export const listPosts = createAction(LIST_POSTS);
 
 const listPostsSaga = createRequestSaga(LIST_POSTS, postsAPI.listPosts);
 
