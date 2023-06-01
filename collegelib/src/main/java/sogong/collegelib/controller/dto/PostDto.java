@@ -7,7 +7,7 @@ import sogong.collegelib.domain.PostType;
 public class PostDto {
     private String title;
     private String body;
-    private String tag;
+    private String tags;
     private UserDtoTwo user;
     private Long id;
 

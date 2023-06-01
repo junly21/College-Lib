@@ -20,7 +20,7 @@ public class Post {
     private String title;
     private LocalDateTime date;
     private String body;
-    private String tag;
+    private String tags;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
