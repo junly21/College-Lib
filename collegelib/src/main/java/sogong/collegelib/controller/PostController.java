@@ -136,6 +136,20 @@ public class PostController {
         throw new NotExistPostException();
     }
 
+    @DeleteMapping("/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭
+    public void deletePost(@PathVariable Long bookId, @PathVariable Long postId, HttpSession session) {
+        Book book = bookService.findOne(bookId);
+        User loginUser = (User) session.getAttribute("loginUser");
+        System.out.println("loginUser = " + loginUser.toString());
+
+        if(book == null){
+            throw new NotExistBookException();
+        }
+
+        postService.deleteById(postId);
+        throw new NotExistPostException();
+    }
+
     @PostMapping("/{bookId}/{postId}/edit")  //삽니다 게시판에서 특정 게시글 클릭
     public PostDto editPost(@RequestBody PostDto postDto, @PathVariable Long bookId, @PathVariable Long postId, HttpSession session) {
         Book book = bookService.findOne(bookId);
