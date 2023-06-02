@@ -17,7 +17,6 @@ const HomePage = () => {
     <>
       <HeaderContainer />
       <SearchBar />
-
       <div>
         <Button onClick={goWrite}>글쓰기</Button>
       </div>

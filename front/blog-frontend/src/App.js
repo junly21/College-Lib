@@ -8,6 +8,7 @@ import PostPage from './pages/PostPage';
 import SearchListPage from './pages/SearchListPage';
 import BookInfoPage from './pages/BookInfoPage';
 import BoardPage from './pages/BoardPage';
+import TestPage from './pages/TestPage';
 
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
       <Route path="/search">
         <Route path=":keyword" element={<SearchListPage />} />
       </Route>
+
+      <Route path="test" element={<TestPage />} />
 
       <Route path="/info">
         <Route path=":bookId" element={<BookInfoPage />} />
