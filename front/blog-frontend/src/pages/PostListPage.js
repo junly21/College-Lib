@@ -1,9 +1,12 @@
 import React from 'react';
 import HeaderContainer from '../containers/common/HeaderContainer';
-//import PostList from '../components/posts/PostList';
+import { useParams } from 'react-router-dom';
 import PostListContainer from '../containers/posts/PostListContainer';
+import book from '../modules/book';
 
 const PostListPage = () => {
+  const { bookId, tags } = useParams();
+  console.log(bookId, tags);
   return (
     <>
       <HeaderContainer />

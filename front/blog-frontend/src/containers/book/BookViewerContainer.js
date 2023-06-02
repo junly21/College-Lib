@@ -20,7 +20,7 @@ const BookViewerContainer = ({ id }) => {
   }, [dispatch, id]);
 
   console.log('BookviewerContainer:', id);
-  console.log(book);
+  console.log('book', book);
 
   return <BookInfo book={book} loading={loading} error={error} />;
 };

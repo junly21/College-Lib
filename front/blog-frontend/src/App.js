@@ -25,7 +25,7 @@ const App = () => {
       <Route path="test" element={<TestPage />} />
 
       <Route path="/info">
-        <Route path=":bookId" element={<BookInfoPage />}></Route>
+        <Route path=":bookId" element={<BookInfoPage />} />
       </Route>
 
       <Route path="/board">
