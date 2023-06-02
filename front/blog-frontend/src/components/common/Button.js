@@ -11,6 +11,7 @@ const StyledButton = styled.button`
   color: white;
   outline: none;
   cursor: pointer;
+  margin: 3px;
 
   background: ${palette.red[0]};
   &:hover {

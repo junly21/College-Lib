@@ -18,6 +18,14 @@ const StyledInput = styled.input`
   width: 500px;
 `;
 
+const SearchBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  //background-color: ${palette.red[1]};
+  margin-left: 1rem;
+  margin-top: 1rem;
+`;
+
 const SearchBar = () => {
   const navigate = useNavigate();
   const [keyword, setSearchTerm] = useState('');
@@ -32,10 +40,10 @@ const SearchBar = () => {
   };
 
   return (
-    <>
+    <SearchBarContainer>
       <StyledInput search="bookname" value={keyword} onChange={onChange} />
       <Button onClick={onSearch}>검색</Button>
-    </>
+    </SearchBarContainer>
   );
 };
 
