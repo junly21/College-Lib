@@ -16,17 +16,14 @@ const App = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/write" element={<WritePage />} />
+      <Route path="/:bookId/write" element={<WritePage />} />
 
       <Route path="/search">
         <Route path=":keyword" element={<SearchListPage />} />
       </Route>
 
-      <Route path="test" element={<TestPage />} />
-
-      <Route path="/info">
-        <Route path=":bookId" element={<BookInfoPage />} />
-      </Route>
+      <Route path="/info/:bookId" element={<BookInfoPage />} />
+      <Route path="/:bookId/:tags" element={<PostListPage />} />
 
       <Route path="/board">
         <Route path=":bookId" element={<BoardPage />} />
@@ -35,8 +32,6 @@ const App = () => {
       <Route path=":bookId" element>
         <Route path=":postId" element={<PostPage />} />
       </Route>
-
-      <Route path="/:bookId/:tags" element={<PostListPage />} />
     </Routes>
   );
 };

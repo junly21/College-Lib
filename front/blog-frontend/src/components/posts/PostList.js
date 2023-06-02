@@ -75,14 +75,14 @@ const PostItem = ({ post }) => {
   );
 };
 
-const PostList = ({ posts, loading, error, showWriteButton }) => {
+const PostList = ({ posts, loading, error, bookId }) => {
   if (error) {
     return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
   }
   return (
     <PostListBlock>
       <WritePostButtonWrapper>
-        <Button cyan to="/write">
+        <Button cyan to={`/${bookId}/write`}>
           새 글 작성하기
         </Button>
       </WritePostButtonWrapper>

@@ -3,7 +3,7 @@ import createRequestSaga, {
   createRequestActionTypes,
 } from '../lib/createRequestSaga';
 import * as postsAPI from '../lib/api/posts'; //posts목록 조회 api사용
-import { takeLatest } from 'redux-saga/effects';
+import { takeLatest, select, call } from 'redux-saga/effects';
 
 const [LIST_POSTS, LIST_POSTS_SUCCESS, LIST_POSTS_FAILURE] =
   createRequestActionTypes('posts/LIST_POSTS'); //포스트 목록 성공 실패 상태
@@ -12,8 +12,15 @@ export const listPosts = createAction(LIST_POSTS);
 
 const listPostsSaga = createRequestSaga(LIST_POSTS, postsAPI.listPosts);
 
+// export function* postsSaga() {
+//   yield takeLatest(LIST_POSTS, listPostsSaga);
+// }
 export function* postsSaga() {
-  yield takeLatest(LIST_POSTS, listPostsSaga);
+  yield takeLatest(LIST_POSTS, function* (action) {
+    const { bookId, tag } = action.payload; // listPosts 액션의 payload로부터 bookId와 tag를 추출
+    const searchParams = yield select((state) => state.router.location.search); // 현재 주소의 쿼리 파라미터를 가져옴
+    yield call(listPostsSaga, { payload: { bookId, tag, searchParams } }); // 수정된 정보를 가지고 listPostsSaga 호출
+  });
 }
 
 const initialState = {

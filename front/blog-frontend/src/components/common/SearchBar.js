@@ -36,7 +36,6 @@ const SearchBar = () => {
 
   const onChange = (e) => {
     setSearchTerm(e.target.value);
-    console.log(e.target.value);
   };
 
   return (

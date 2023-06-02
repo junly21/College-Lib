@@ -56,16 +56,25 @@ const BookImage = styled.img`
 
 const BookInfo = ({ book, loading, error }) => {
   const navigate = useNavigate();
-  const goPostlist = () => {
-    navigate('/2/buy');
-  };
-
   if (loading || !book) {
     return null;
   }
 
   const { id, name, authorName } = book;
+
   console.log('Bookinfo: ', id);
+
+  const goBuylist = () => {
+    navigate(`/${id}/buy`);
+  };
+
+  const goSelllist = () => {
+    navigate(`/${id}/sell`);
+  };
+
+  const goQAlist = () => {
+    navigate(`/${id}/qa`);
+  };
   return (
     <BookViewerBlock>
       <BookHead>
@@ -77,9 +86,9 @@ const BookInfo = ({ book, loading, error }) => {
       <div className="c1image">
         <BookImage src="/img/imageEx.jpeg" />
       </div>
-      <Button onClick={goPostlist}>삽니다</Button>
-      <Button onClick={goPostlist}>팝니다</Button>
-      <Button onClick={goPostlist}>질문</Button>
+      <Button onClick={goBuylist}>삽니다</Button>
+      <Button onClick={goSelllist}>팝니다</Button>
+      <Button onClick={goQAlist}>질문</Button>
     </BookViewerBlock>
   );
 };

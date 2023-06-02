@@ -7,15 +7,15 @@ import { useNavigate } from 'react-router-dom';
 const WriteActionButtonsContainer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { title, body, tags, post, postError, originalPostId } = useSelector(
-    ({ write }) => ({
+  const { title, body, tags, post, postError, originalPostId, bookId } =
+    useSelector(({ write, book }) => ({
       title: write.title,
       body: write.body,
       tags: write.tags,
       post: write.post,
       postError: write.postError,
-    }),
-  );
+      bookId: book.id,
+    }));
 
   // 포스트 등록
   const onPublish = () => {
@@ -24,6 +24,7 @@ const WriteActionButtonsContainer = () => {
         title,
         body,
         tags,
+        bookId,
       }),
     );
   };
@@ -37,7 +38,7 @@ const WriteActionButtonsContainer = () => {
   useEffect(() => {
     if (post) {
       const { id } = post;
-      navigate(`/2/${id}`);
+      navigate(`/${bookId}/${id}`);
     }
     if (postError) {
       console.log(postError);

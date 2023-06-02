@@ -6,11 +6,12 @@ import book from '../modules/book';
 
 const PostListPage = () => {
   const { bookId, tags } = useParams();
-  console.log(bookId, tags);
+  // console.log('bookid는', bookId);
+  // console.log('tag는', tags);
   return (
     <>
       <HeaderContainer />
-      <PostListContainer />
+      <PostListContainer bookId={bookId} tag={tags} />
     </>
   );
 };

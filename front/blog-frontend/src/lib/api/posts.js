@@ -8,8 +8,8 @@ export const writePost = ({ title, body, tags }) =>
 //modules/post.js
 export const readPost = (id) => client.get(`/2/${id}`); //BookId/postId로 리다이렉트 해서 글 정보 받음
 
-export const listPosts = () => {
-  return client.get('/2/buy');
+export const listPosts = (bookId, tag) => {
+  return client.get(`/${bookId}/${tag}`);
 };
 //최종 코드는 이렇게.
 // export const listPosts = (bookId, tags) => {

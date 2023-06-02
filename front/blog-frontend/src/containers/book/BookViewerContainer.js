@@ -19,8 +19,8 @@ const BookViewerContainer = ({ id }) => {
     // 언마운트될 때 리덕스에서 포스트 데이터 없애기
   }, [dispatch, id]);
 
-  console.log('BookviewerContainer:', id);
-  console.log('book', book);
+  //   console.log('BookviewerContainer:', id);
+  //   console.log('book', book);
 
   return <BookInfo book={book} loading={loading} error={error} />;
 };
