@@ -54,42 +54,28 @@ const BookImage = styled.img`
   margin-bottom: 1rem;
 `;
 
-// const BookInfo = ({ book, error, loading }) => {
-//   // 로딩중이거나, 아직 포스트 데이터가 없을 시
-//   if (loading || !book) {
-//     return null;
-//   }
-//   const { id, name, authorName } = book;
-
-//   return (
-//     <BookViewerBlock>
-//       <PostHead>
-//         <h3>{title}</h3>
-//         <SubInfo>
-//           <span>
-//             <b>{user.username}</b>
-//           </span>
-//           <span>{new Date(publishedDate).toLocaleDateString()}</span>
-//         </SubInfo>
-//         <Tags tags={tags}></Tags>
-//       </PostHead>
-
-//       <PostContent dangerouslySetInnerHTML={{ __html: body }} />
-//     </BookViewerBlock>
-//   );
-// };
-
 const BookInfo = ({ book, loading, error }) => {
+  const { id, name, authorName } = book;
   const navigate = useNavigate();
-  const goPostlist = () => {
-    navigate('/2/buy');
+  const goBuylist = () => {
+    navigate(`/${id}/buy`);
+  };
+  const goSelllist = () => {
+    navigate(`/${id}/sell`);
+  };
+  const goQAlist = () => {
+    navigate(`/${id}/qa`);
   };
 
-  const { id, name, authorName } = book;
+  if (loading || !book) {
+    return null;
+  }
+
+  console.log('Bookinfo: ', id);
   return (
     <BookViewerBlock>
       <BookHead>
-        {name}
+        <h3>{name}</h3>
         <SubInfo>
           <b>{authorName}</b>
         </SubInfo>
@@ -97,9 +83,9 @@ const BookInfo = ({ book, loading, error }) => {
       <div className="c1image">
         <BookImage src="/img/imageEx.jpeg" />
       </div>
-      <Button onClick={goPostlist}>삽니다</Button>
-      <Button onClick={goPostlist}>팝니다</Button>
-      <Button onClick={goPostlist}>질문</Button>
+      <Button onClick={goBuylist}>삽니다</Button>
+      <Button onClick={goSelllist}>팝니다</Button>
+      <Button onClick={goQAlist}>질문</Button>
     </BookViewerBlock>
   );
 };

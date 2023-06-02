@@ -6,7 +6,7 @@ import * as bookAPI from '../lib/api/book';
 import { takeLatest } from 'redux-saga/effects';
 
 const [READ_INFO, READ_INFO_SUCCESS, READ_INFO_FAILURE] =
-  createRequestActionTypes('post/READ_POST');
+  createRequestActionTypes('book/READ_INFO');
 const UNLOAD_INFO = 'book/UNLOAD_INFO'; // 포스트 페이지에서 벗어날 때 데이터 비우기
 
 export const readBookInfo = createAction(READ_INFO, (id) => id);

@@ -6,13 +6,13 @@ import BookViewerContainer from '../containers/book/BookViewerContainer';
 import { useParams } from 'react-router-dom';
 
 const BookInfoPage = () => {
-  const id = useParams();
+  const { bookId } = useParams();
   //const bookId = { id };
-  console.log('bookidparam', id);
+  console.log('bookidparam', bookId);
   return (
     <>
       <HeaderContainer />
-      <BookViewerContainer />
+      <BookViewerContainer id={bookId} />
     </>
   );
 };

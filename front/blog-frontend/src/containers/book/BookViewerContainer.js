@@ -17,10 +17,10 @@ const BookViewerContainer = ({ id }) => {
   useEffect(() => {
     dispatch(readBookInfo(id));
     // 언마운트될 때 리덕스에서 포스트 데이터 없애기
-    return () => {
-      dispatch(unloadBookInfo());
-    };
   }, [dispatch, id]);
+
+  console.log('BookviewerContainer:', id);
+  console.log(book);
 
   return <BookInfo book={book} loading={loading} error={error} />;
 };
