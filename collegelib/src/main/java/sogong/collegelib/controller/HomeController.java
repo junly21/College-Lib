@@ -42,12 +42,14 @@ public class HomeController {
 //
 //        // 필요한 데이터를 담은 DTO 또는 VO 객체를 생성하여 반환
 //        return loginUser;
+        System.out.println(keyword);
         List<Book> bookList = bookService.findBooksByKeyword(keyword);
         List<BookDto> bookDtoList = new ArrayList<>();
         for(Book book : bookList) {
             BookDto bookDto = new BookDto();
             bookDto.setId(book.getId());
             bookDto.setName(book.getName());
+            bookDto.setAuthorName(book.getAuthor().getName());
             bookDtoList.add(bookDto);
         }
         return bookDtoList;
