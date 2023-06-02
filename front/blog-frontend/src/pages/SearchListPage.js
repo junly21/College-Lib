@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import SearchListContainer from '../containers/searchlist/SearchListContainer';
-import SearchList from '../components/searchlist/SearchList';
+//import SearchList from '../components/searchlist/SearchList';
 
 import { useParams } from 'react-router-dom';
 

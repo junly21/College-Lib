@@ -8,7 +8,6 @@ import { listSearch } from '../../modules/search';
 
 const SearchListContainer = ({ keyword }) => {
   // const { username } = useParams();
-  // const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const { error, loading, books } = useSelector(
     ({ loading, user, search }) => ({
@@ -19,6 +18,7 @@ const SearchListContainer = ({ keyword }) => {
   );
   //books:[{},{},{}]
   useEffect(() => {
+    //console.log('SearchListContainer', keyword);
     dispatch(listSearch(keyword));
   }, [dispatch, keyword]);
 

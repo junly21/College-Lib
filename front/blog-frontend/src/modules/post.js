@@ -14,6 +14,7 @@ export const unloadPost = createAction(UNLOAD_POST);
 
 const readPostSaga = createRequestSaga(READ_POST, postsAPI.readPost);
 export function* postSaga() {
+  console.log('postSaga시작');
   yield takeLatest(READ_POST, readPostSaga);
 }
 

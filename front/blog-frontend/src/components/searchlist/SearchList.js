@@ -112,7 +112,7 @@ const SearchList = ({ books, loading, error }) => {
       {!loading && books && (
         <div>
           {books.map((book) => (
-            <SearchItem book={book} />
+            <SearchItem book={book} key={book.id} />
           ))}
         </div>
       )}

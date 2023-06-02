@@ -8,14 +8,14 @@ import * as searchAPI from '../lib/api/search';
 const [LIST_SEARCH, LIST_SEARCH_SUCCESS, LIST_SEARCH_FAILURE] =
   createRequestActionTypes('search/LIST_SEARCH'); //포스트 목록 성공 실패 상태
 
-export const listSearch = createAction(LIST_SEARCH, ({ keyword }) => ({
+export const listSearch = createAction(LIST_SEARCH, (keyword) => ({
   keyword,
 }));
 
 const searchListSaga = createRequestSaga(LIST_SEARCH, searchAPI.listSearch);
 
 export function* searchSaga() {
-  console.log('searchSaga시작');
+  //console.log('searchSaga시작');
   yield takeLatest(LIST_SEARCH, searchListSaga);
 }
 

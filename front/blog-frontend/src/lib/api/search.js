@@ -2,5 +2,6 @@ import client from './client';
 
 // 로그인
 export const listSearch = (keyword) => {
-  return client.get(`/search?keyword=${keyword}`);
+  // console.log('api부분에 전달 확인', keyword);
+  return client.get('/search', { params: keyword });
 };
