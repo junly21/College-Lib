@@ -15,9 +15,10 @@ const SearchListContainer = ({ keyword }) => {
       error: search.error,
       loading: loading['searchs/LIST_SEARCH'],
       user: user.user,
-      books: search.lists,
+      books: search.books,
     }),
   );
+  //books:[{},{},{}]
   useEffect(() => {
     dispatch(listSearch(keyword));
   }, [dispatch, tags, searchParams]);

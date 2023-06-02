@@ -90,16 +90,15 @@ const Tags = ({ tags }) => {
 };
 
 const SearchItem = ({ book }) => {
-  //const { title, id, authorname } = book; //기타 책 정보들 SearchListContainer에서 props로 줄거임.
+  const { id, name } = book; //기타 책 정보들 SearchListContainer에서 props로 줄거임.
   return (
     <SearchItemBlock>
-      {/* <Link to={`/info/${id}`}>
-        <Title>{title}</Title>
+      <Link to={`/info/${id}`}>
+        <Title>{name}</Title>
       </Link>
-      <SubInfo username={username} publishedDate={new Date(date)} />
+      {/* <SubInfo username={username} publishedDate={new Date(date)} />
       <Tags tags={tags} />
       <p>{body}</p> */}
-      <Title>책 제목</Title>
     </SearchItemBlock>
   );
 };

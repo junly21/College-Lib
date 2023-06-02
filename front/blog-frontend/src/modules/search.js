@@ -20,10 +20,10 @@ export function* searchSaga() {
 
 const initialState = {
   //검색목록 모듈
-  lists: null,
+  books: null,
   error: null,
 };
-//list는 배열이고 bookId, bookTitle, booknname, 등등
+//list는 배열이고 bookId, bookTitle, authorname, 등등
 
 const search = handleActions(
   {
