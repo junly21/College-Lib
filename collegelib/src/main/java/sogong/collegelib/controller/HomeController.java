@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sogong.collegelib.Service.BookService;
+import sogong.collegelib.controller.dto.BookDto;
 import sogong.collegelib.controller.dto.UserDto;
 import sogong.collegelib.domain.Book;
 import sogong.collegelib.domain.User;
@@ -28,19 +29,28 @@ public class HomeController {
     private final BookService bookService;
 
     @GetMapping("/")
-    public User homeLogin(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            throw new NotLoginUserException();
+    public List<BookDto> homeLogin(@RequestParam("search") String search, HttpServletRequest request) {
+//        HttpSession session = request.getSession(false);
+//        if (session == null) {
+//            throw new NotLoginUserException();
+//        }
+//
+//        User loginUser = (User)session.getAttribute("loginUser");
+//        if (loginUser == null) {
+//            throw new NotLoginUserException();
+//        }
+//
+//        // 필요한 데이터를 담은 DTO 또는 VO 객체를 생성하여 반환
+//        return loginUser;
+        List<Book> bookList = bookService.findBooksByKeyword(search);
+        List<BookDto> bookDtoList = new ArrayList<>();
+        for(Book book : bookList) {
+            BookDto bookDto = new BookDto();
+            bookDto.setId(book.getId());
+            bookDto.setName(book.getName());
+            bookDtoList.add(bookDto);
         }
-
-        User loginUser = (User)session.getAttribute("loginUser");
-        if (loginUser == null) {
-            throw new NotLoginUserException();
-        }
-
-        // 필요한 데이터를 담은 DTO 또는 VO 객체를 생성하여 반환
-        return loginUser;
+        return bookDtoList;
     }
 
     @GetMapping("/check")
@@ -69,8 +79,8 @@ public class HomeController {
         return user;
     }
 
-    @GetMapping("/search")
-    public List<Book> searchBook(@RequestParam("keyword") String keyword) {
-       return bookService.findBooksByKeyword(keyword);
-    }
+//    @GetMapping("/search")
+//    public List<Book> searchBook(@RequestParam("keyword") String keyword) {
+//       return bookService.findBooksByKeyword(keyword);
+//    }
 }
