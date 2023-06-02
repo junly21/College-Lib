@@ -28,8 +28,8 @@ public class HomeController {
     private final UserRepository userRepository;
     private final BookService bookService;
 
-    @GetMapping("/")
-    public List<BookDto> homeLogin(@RequestParam("search") String search, HttpServletRequest request) {
+    @GetMapping("/search")
+    public List<BookDto> homeLogin(@RequestParam("keyword") String keyword, HttpServletRequest request) {
 //        HttpSession session = request.getSession(false);
 //        if (session == null) {
 //            throw new NotLoginUserException();
@@ -42,7 +42,7 @@ public class HomeController {
 //
 //        // 필요한 데이터를 담은 DTO 또는 VO 객체를 생성하여 반환
 //        return loginUser;
-        List<Book> bookList = bookService.findBooksByKeyword(search);
+        List<Book> bookList = bookService.findBooksByKeyword(keyword);
         List<BookDto> bookDtoList = new ArrayList<>();
         for(Book book : bookList) {
             BookDto bookDto = new BookDto();
