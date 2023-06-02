@@ -12,8 +12,7 @@ const SearchListPage = () => {
   return (
     <>
       <HeaderContainer />
-      <SearchList />
-      {/* <SearchListContainer keyword={keyword} /> */}
+      <SearchListContainer keyword={keyword} />
     </>
   );
 };

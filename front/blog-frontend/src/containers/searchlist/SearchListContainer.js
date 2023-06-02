@@ -2,35 +2,27 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchList from '../../components/searchlist/SearchList';
-import { listPosts } from '../../modules/posts';
-import { useParams, useSearchParams } from 'react-router-dom';
+// import { listPosts } from '../../modules/posts';
+// import { useParams, useSearchParams } from 'react-router-dom';
 import { listSearch } from '../../modules/search';
 
 const SearchListContainer = ({ keyword }) => {
-  const { username } = useParams();
-  const [searchParams] = useSearchParams();
+  // const { username } = useParams();
+  // const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const { error, loading, user, tags, books } = useSelector(
+  const { error, loading, books } = useSelector(
     ({ loading, user, search }) => ({
       error: search.error,
       loading: loading['searchs/LIST_SEARCH'],
-      user: user.user,
       books: search.books,
     }),
   );
   //books:[{},{},{}]
   useEffect(() => {
     dispatch(listSearch(keyword));
-  }, [dispatch, tags, searchParams]);
+  }, [dispatch, keyword]);
 
-  return (
-    <SearchList
-      loading={loading}
-      error={error}
-      books={books}
-      showWriteButton={user}
-    />
-  );
+  return <SearchList loading={loading} books={books} />;
 };
 
 export default SearchListContainer;

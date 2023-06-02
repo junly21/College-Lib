@@ -109,18 +109,18 @@ const SearchList = ({ books, loading, error }) => {
   }
   return (
     <SearchListBlock>
-      {/* {!loading && books && (
+      {!loading && books && (
         <div>
           {books.map((book) => (
             <SearchItem book={book} />
           ))}
         </div>
-      )} */}
-      <div>
+      )}
+      {/* <div>
         <SearchItem />
         <SearchItem />
         <SearchItem />
-      </div>
+      </div> */}
     </SearchListBlock>
   );
 };

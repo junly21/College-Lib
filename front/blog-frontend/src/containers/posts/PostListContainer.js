@@ -19,7 +19,7 @@ const PostListContainer = () => {
     }),
   );
   useEffect(() => {
-    //buy게시판 가면 buy태그가 되도록.
+    //buy게시판 가면
     dispatch(listPosts(tags)); //
   }, [dispatch, tags, searchParams]);
 

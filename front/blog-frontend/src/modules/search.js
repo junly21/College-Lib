@@ -15,6 +15,7 @@ export const listSearch = createAction(LIST_SEARCH, ({ keyword }) => ({
 const searchListSaga = createRequestSaga(LIST_SEARCH, searchAPI.listSearch);
 
 export function* searchSaga() {
+  console.log('searchSaga시작');
   yield takeLatest(LIST_SEARCH, searchListSaga);
 }
 
@@ -30,6 +31,7 @@ const search = handleActions(
     [LIST_SEARCH_SUCCESS]: (state, { payload: books, meta: response }) => ({
       ...state,
       books,
+      error: null,
       //lastPage: parseInt(response.headers['last-page'], 10), // 문자열을 숫자로 변환
     }),
     [LIST_SEARCH_FAILURE]: (state, { payload: error }) => ({
