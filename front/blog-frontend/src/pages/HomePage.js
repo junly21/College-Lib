@@ -17,12 +17,12 @@ const HomePage = () => {
     <>
       <HeaderContainer />
       <SearchBar />
-      <div>
+      {/* <div>
         <Button onClick={goWrite}>글쓰기</Button>
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <Button onClick={goPostlist}>글목록(일단buy만)</Button>
-      </div>
+      </div> */}
     </>
   );
 };
