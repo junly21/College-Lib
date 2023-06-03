@@ -23,4 +23,5 @@ export const listPosts = ({ bookId, tag }) => client.get(`/${bookId}/${tag}`);
 //   return client.get(`/2/${tags}`);
 // };
 
-export const removePost = (id) => client.delete(`/2/${id}`);
+export const removePost = ({ bookId, postId }) =>
+  client.delete(`/${bookId}/${postId}`);
