@@ -4,21 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { writePost } from '../../modules/write';
 import { useNavigate } from 'react-router-dom';
 
-const WriteActionButtonsContainer = () => {
+const WriteActionButtonsContainer = ({ bookId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { title, body, tags, post, postError, originalPostId, bookId } =
-    useSelector(({ write, book }) => ({
+  const { title, body, tags, post, postError, originalPostId } = useSelector(
+    ({ write, book }) => ({
       title: write.title,
       body: write.body,
       tags: write.tags,
       post: write.post,
       postError: write.postError,
-      bookId: book.id,
-    }));
+    }),
+  );
 
   // 포스트 등록
   const onPublish = () => {
+    console.log('WriteActionButtons전달확인', bookId);
     dispatch(
       writePost({
         title,

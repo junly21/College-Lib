@@ -15,11 +15,15 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value,
 }));
-export const writePost = createAction(WRITE_POST, ({ title, body, tags }) => ({
-  title,
-  body,
-  tags,
-}));
+export const writePost = createAction(
+  WRITE_POST,
+  ({ title, body, tags, bookId }) => ({
+    title,
+    body,
+    tags,
+    bookId,
+  }),
+);
 
 const writePostSaga = createRequestSaga(WRITE_POST, postsAPI.writePost);
 

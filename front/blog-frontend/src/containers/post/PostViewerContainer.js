@@ -7,7 +7,7 @@ import PostActionButtons from '../../components/post/PostActionButtons';
 import { removePost } from '../../lib/api/posts';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const PostViewerContainer = () => {
+const PostViewerContainer = ({ bookId }) => {
   // 처음 마운트될 때 포스트 읽기 API 요청
   const { postId } = useParams();
   const navigate = useNavigate();
@@ -22,12 +22,13 @@ const PostViewerContainer = () => {
   );
 
   useEffect(() => {
-    dispatch(readPost(postId));
+    dispatch(readPost({ bookId, postId }));
+    console.log('postviewercontainer에서 받은', bookId);
     // 언마운트될 때 리덕스에서 포스트 데이터 없애기
     return () => {
       dispatch(unloadPost());
     };
-  }, [dispatch, postId]);
+  }, [dispatch, bookId, postId]);
 
   // const onEdit = () => {
   //   dispatch(setOriginalPost(post));

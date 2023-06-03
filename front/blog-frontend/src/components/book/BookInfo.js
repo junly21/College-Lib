@@ -65,15 +65,15 @@ const BookInfo = ({ book, loading, error }) => {
   console.log('Bookinfo: ', id);
 
   const goBuylist = () => {
-    navigate(`/${id}/buy`);
+    navigate(`/${id}/board/buy`);
   };
 
   const goSelllist = () => {
-    navigate(`/${id}/sell`);
+    navigate(`/${id}/board/sell`);
   };
 
   const goQAlist = () => {
-    navigate(`/${id}/qa`);
+    navigate(`/${id}/board/qa`);
   };
   return (
     <BookViewerBlock>

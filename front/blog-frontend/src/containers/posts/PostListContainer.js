@@ -9,22 +9,22 @@ const PostListContainer = ({ bookId, tag }) => {
   const { username } = useParams();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const { posts, error, loading, user, tags } = useSelector(
+  const { posts, error, loading, user, bookid } = useSelector(
     ({ posts, loading, user, book }) => ({
       posts: posts.posts,
       error: posts.error,
       loading: loading['posts/LIST_POSTS'],
       user: user.user,
       tags: posts.tags,
-      bookId: book.id,
+      bookid: book.id,
     }),
   );
   useEffect(() => {
     //buy게시판 가면
     dispatch(listPosts(bookId, tag)); //
+    console.log('PostListcontainer에 전달된 인자', bookId, tag);
   }, [dispatch, bookId, tag, searchParams]);
 
-  console.log('container', bookId, tag);
   return (
     <PostList
       loading={loading}
