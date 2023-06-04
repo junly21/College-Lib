@@ -54,6 +54,7 @@ const PostViewerContainer = ({ bookId }) => {
         bookId={bookId}
         loading={loading}
         post={post}
+        user={user}
       />
     </>
   );

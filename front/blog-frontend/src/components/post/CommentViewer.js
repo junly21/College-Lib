@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
 import CommentWritingContainer from '../../containers/post/CommentWritingContainer';
+import CommentActionButtons from '../../components/post/CommentActionButtons';
 
 const CommentViewerBlock = styled(Responsive)`
   border: 1px solid ${palette.red[1]};
@@ -37,55 +38,33 @@ const CommentContent = styled.div`
   margin-bottom: 1rem;
 `;
 
-// const CommentViewer = ({ post, error, loading, actionButtons }) => {
-//   // 로딩중이거나, 아직 포스트 데이터가 없을 시
-//   if (loading || !post) {
-//     return null;
-//   }
-//   const { title, body, user, publishedDate, tags } = post;
-
-//   return (
-//     <PostViewerBlock>
-//       <PostHead>
-//         <h3>{title}</h3>
-//         <SubInfo>
-//           <span>
-//             <b>{user.username}</b>
-//           </span>
-//           <span>{new Date(publishedDate).toLocaleDateString()}</span>
-//         </SubInfo>
-//         <Tags tags={tags}></Tags>
-//       </PostHead>
-
-//       <PostContent dangerouslySetInnerHTML={{ __html: body }} />
-//       {actionButtons}
-//     </PostViewerBlock>
-//   );
-// };
-
-const CommentItem = ({ comment }) => {
+const CommentItem = ({ comment, postuser }) => {
   const { user, text } = comment; //기타 책 정보들 SearchListContainer에서 props로 줄거임.
   const filteredText = JSON.parse(text).body;
+
+  const ownPost = postuser === (user && user.loginId);
 
   return (
     <CommentHead>
       {user.username}
       <CommentContent>{filteredText}</CommentContent>
+      {ownPost && <CommentActionButtons />}
     </CommentHead>
   );
 };
 
-const CommentViewer = ({ postId, bookId, loading, post }) => {
+const CommentViewer = ({ postId, bookId, loading, post, user }) => {
   if (loading || !post) {
     return null;
   }
   const comments = post.comments;
+  const postuser = user.loginId;
   return (
     <CommentViewerBlock>
       {!loading && comments && (
         <div>
           {comments.map((comment) => (
-            <CommentItem comment={comment} />
+            <CommentItem comment={comment} postuser={postuser} />
           ))}
         </div>
       )}
