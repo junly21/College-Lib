@@ -21,7 +21,8 @@ const WriteActionButtonsContainer = ({ bookId }) => {
   // 포스트 등록
   const onPublish = () => {
     if (originalPostId) {
-      dispatch(updatePost({ title, body, tags, id: originalPostId }));
+      dispatch(updatePost({ title, body, tags, id: originalPostId, bookId }));
+      console.log('오리지날포스트아이디', originalPostId);
       return;
     }
     dispatch(
