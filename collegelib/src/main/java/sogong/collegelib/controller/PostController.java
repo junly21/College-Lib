@@ -140,18 +140,10 @@ public class PostController {
             postDto.getComments().add(commentDto);
         }
 
-        for (Comment comment : post.getAnswers()) {
-            System.out.println("for post: comment = " + comment);
-        }
-
-        for (CommentDto comment : postDto.getComments()) {
-            System.out.println("for dto: comment = " + comment);
-        }
-
         return postDto;
     }
 
-    @PostMapping("/comment/{postId}")  //댓글
+    @PostMapping("/{bookId}/{postId}")  //댓글
     public String postComment(@PathVariable Long postId, @RequestBody String comment, HttpSession session) {
         User loginUser = (User)session.getAttribute("loginUser");
         Post post = postService.findOne(postId);
@@ -162,6 +154,7 @@ public class PostController {
         commentDto.setPost(post);
         post.getAnswers().add(commentDto);
         commentService.saveComment(commentDto);
+
 
         return commentDto.getText();
     }
