@@ -134,6 +134,7 @@ public class PostController {
         }
         for (Comment comment : post.getAnswers()) {
             CommentDto commentDto = new CommentDto();
+            commentDto.setId(comment.getId());
             commentDto.setText(comment.getText());
             commentDto.setDate(comment.getDate());
             commentDto.setUser(new UserDtoTwo(comment.getUser().getId(), comment.getUser().getLoginId(), comment.getUser().getPassword(), comment.getUser().getUsername()));
@@ -174,9 +175,7 @@ public class PostController {
             throw new NotExistBookException();
         }
 
-
         postService.deleteById(postId);
-        throw new NotExistPostException();
     }
 
     @PostMapping("/{bookId}/{postId}/edit")
@@ -202,6 +201,18 @@ public class PostController {
         Long Id = postService.savePost(post);
         dto.setId(Id);
         return dto;
+    }
+
+    @DeleteMapping("/{bookId}/{postId}/{commentId}")
+    public void deleteComment(@PathVariable Long commentId, HttpSession session) {
+        User loginUser = (User) session.getAttribute("loginUser");
+        User user = commentService.findOne(commentId).getUser();
+
+        if(user.getId() != loginUser.getId()){
+            throw new InvalidUserException();
+        }
+
+        commentService.deleteById(commentId);
     }
 
 
@@ -230,6 +241,10 @@ public class PostController {
         Long postId = postService.savePost(post);
         dto.setId(postId);
         return dto;
+    }
+
+    static class CommentBodyDto{
+        private String body;
     }
 
 
