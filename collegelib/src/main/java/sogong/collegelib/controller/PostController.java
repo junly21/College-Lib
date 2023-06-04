@@ -144,11 +144,11 @@ public class PostController {
     }
 
     @PostMapping("/comment/{postId}")  //댓글
-    public CommentDto postComment(@PathVariable Long postId, @RequestBody String comment, HttpSession session) {
+    public CommentDto postComment(@PathVariable Long postId, @RequestBody String body, HttpSession session) {
         User loginUser = (User)session.getAttribute("loginUser");
         Post post = postService.findOne(postId);
         Comment commentDto = new Comment();
-        commentDto.setText(comment);
+        commentDto.setText(body);
         commentDto.setDate(LocalDateTime.now());
         commentDto.setUser(loginUser);
         commentDto.setPost(post);
