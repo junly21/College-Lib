@@ -193,16 +193,13 @@ public class PostController {
             throw new InvalidUserException();
         }
 
-
-        post.setTitle(postDto.getTitle());
-        post.setBody(postDto.getBody());
-        post.setTags(postDto.getTags());
+        Post updatePost = postService.updatePost(postDto, postId);
 
         PostDto dto = new PostDto();
-        dto.setId(post.getId());
-        dto.setTags(post.getTags());
-        dto.setBody(post.getBody());
-        dto.setTitle(post.getTitle());
+        dto.setId(updatePost.getId());
+        dto.setTags(updatePost.getTags());
+        dto.setBody(updatePost.getBody());
+        dto.setTitle(updatePost.getTitle());
         dto.setUser(new UserDtoTwo(user.getId(), user.getLoginId(), user.getPassword(), user.getUsername()));
 
         if(post.getAnswers() == null){
