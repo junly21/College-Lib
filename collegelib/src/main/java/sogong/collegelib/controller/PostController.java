@@ -129,18 +129,30 @@ public class PostController {
         postDto.setId(post.getId());
         postDto.setUser(new UserDtoTwo(user.getId(), user.getLoginId(), user.getPassword(), user.getUsername()));
 
+        if(post.getAnswers() == null){
+            return postDto;
+        }
         for (Comment comment : post.getAnswers()) {
             CommentDto commentDto = new CommentDto();
-            commentDto.setText(commentDto.getText());
+            commentDto.setText(comment.getText());
             commentDto.setDate(comment.getDate());
             commentDto.setUser(new UserDtoTwo(comment.getUser().getId(), comment.getUser().getLoginId(), comment.getUser().getPassword(), comment.getUser().getUsername()));
             postDto.getComments().add(commentDto);
         }
+
+        for (Comment comment : post.getAnswers()) {
+            System.out.println("for post: comment = " + comment);
+        }
+
+        for (CommentDto comment : postDto.getComments()) {
+            System.out.println("for dto: comment = " + comment);
+        }
+
         return postDto;
     }
 
-    @PostMapping("/{bookId}/{postId}")  //댓글
-    public void postComment(@PathVariable Long bookId, @PathVariable Long postId, @RequestBody String comment, HttpSession session) {
+    @PostMapping("/comment/{postId}")  //댓글
+    public String postComment(@PathVariable Long postId, @RequestBody String comment, HttpSession session) {
         User loginUser = (User)session.getAttribute("loginUser");
         Post post = postService.findOne(postId);
         Comment commentDto = new Comment();
@@ -150,6 +162,8 @@ public class PostController {
         commentDto.setPost(post);
         post.getAnswers().add(commentDto);
         commentService.saveComment(commentDto);
+
+        return commentDto.getText();
     }
 
     @DeleteMapping("/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭

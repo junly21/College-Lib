@@ -13,5 +13,4 @@ public class PostDto {
     private UserDtoTwo user;
     private Long id;
     private List<CommentDto> comments;
-
 }
