@@ -6,6 +6,7 @@ import PostActionButtons from '../../components/post/PostActionButtons';
 //import { setOriginalPost } from '../../modules/write';
 import { removePost } from '../../lib/api/posts';
 import { useParams, useNavigate } from 'react-router-dom';
+import CommentViewer from '../../components/post/CommentViewer';
 
 const PostViewerContainer = ({ bookId }) => {
   // 처음 마운트될 때 포스트 읽기 API 요청
@@ -48,15 +49,18 @@ const PostViewerContainer = ({ bookId }) => {
   const ownPost = (user && user.loginId) === (post && post.user.loginId);
 
   return (
-    <PostViewer
-      post={post}
-      loading={loading}
-      error={error}
-      actionButtons={
-        // ownPost && <PostActionButtons onEdit={onEdit} onRemove={onRemove} />
-        ownPost && <PostActionButtons onRemove={onRemove} />
-      }
-    />
+    <>
+      <PostViewer
+        post={post}
+        loading={loading}
+        error={error}
+        actionButtons={
+          // ownPost && <PostActionButtons onEdit={onEdit} onRemove={onRemove} />
+          ownPost && <PostActionButtons onRemove={onRemove} />
+        }
+      />
+      <CommentViewer />
+    </>
   );
 };
 
