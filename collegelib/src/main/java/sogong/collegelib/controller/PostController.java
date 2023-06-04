@@ -178,28 +178,44 @@ public class PostController {
         postService.deleteById(postId);
     }
 
+
+
+
     @PostMapping("/{bookId}/{postId}/edit")
     public PostDto editPost(@RequestBody PostDto postDto, @PathVariable Long bookId, @PathVariable Long postId, HttpSession session) {
         Book book = bookService.findOne(bookId);
         User loginUser = (User) session.getAttribute("loginUser");
-        System.out.println("loginUser = " + loginUser.toString());
 
-        Post post = new Post();
-        post.setBody(postDto.getBody());
+        Post post = postService.findOne(postId);
+        User user = postService.findOne(postId).getUser();
+
+        if(user.getId() != loginUser.getId()){
+            throw new InvalidUserException();
+        }
+
+
         post.setTitle(postDto.getTitle());
-        post.setDate(LocalDateTime.now());
-        post.setBook(book);
-
+        post.setBody(postDto.getBody());
         post.setTags(postDto.getTags());
-        post.setUser(loginUser);
 
         PostDto dto = new PostDto();
-        dto.setBody(postDto.getBody());
-        dto.setTitle(postDto.getTitle());
-        dto.setTags(postDto.getTags());
-        dto.setUser(new UserDtoTwo(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getUsername()));
-        Long Id = postService.savePost(post);
-        dto.setId(Id);
+        dto.setId(post.getId());
+        dto.setTags(post.getTags());
+        dto.setBody(post.getBody());
+        dto.setTitle(post.getTitle());
+        dto.setUser(new UserDtoTwo(user.getId(), user.getLoginId(), user.getPassword(), user.getUsername()));
+
+        if(post.getAnswers() == null){
+            return postDto;
+        }
+        for (Comment comment : post.getAnswers()) {
+            CommentDto commentDto = new CommentDto();
+            commentDto.setId(comment.getId());
+            commentDto.setText(comment.getText());
+            commentDto.setDate(comment.getDate());
+            commentDto.setUser(new UserDtoTwo(comment.getUser().getId(), comment.getUser().getLoginId(), comment.getUser().getPassword(), comment.getUser().getUsername()));
+            dto.getComments().add(commentDto);
+        }
         return dto;
     }
 
