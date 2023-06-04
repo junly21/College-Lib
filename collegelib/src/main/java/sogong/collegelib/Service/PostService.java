@@ -3,6 +3,7 @@ package sogong.collegelib.Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sogong.collegelib.controller.dto.PostDto;
 import sogong.collegelib.domain.Post;
 import sogong.collegelib.repository.PostRepository;
 
@@ -26,6 +27,17 @@ public class PostService {
     @Transactional
     public void deleteById(Long postId){
         postRepository.deleteById(postId);
+    }
+
+    @Transactional
+    public Post updatePost(PostDto postDto, Long postId) {
+        Post post = postRepository.findOne(postId);
+
+        post.setTitle(postDto.getTitle());
+        post.setBody(postDto.getBody());
+        post.setTags(postDto.getTags());
+
+        return post;
     }
 
     public List<Post> findBuyPost(Long bookId) {
