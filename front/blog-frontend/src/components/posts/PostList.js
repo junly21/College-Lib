@@ -4,21 +4,20 @@ import Responsive from '../common/Responsive';
 import Button from '../common/Button';
 import palette from '../../lib/styles/palette';
 import SubInfo from '../common/Subinfo';
-import Tags from '../common/Tags';
 import { Link } from 'react-router-dom';
 
 const PostListBlock = styled(Responsive)`
-  margin-top: 3rem;
+  margin-top: 2rem;
 `;
 
 const WritePostButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 `;
 
 const PostItemBlock = styled.div`
-  border-bottom: 1px solid ${palette.gray[4]};
+  border-top: 1px solid ${palette.red[1]};
   padding-top: 1rem;
   padding-bottom: 1rem;
   /* 맨 위 포스트는 padding-top 없음 */
@@ -36,65 +35,50 @@ const PostItemBlock = styled.div`
   }
 `;
 
-// const PostItem = ({ post }) => {
-//   const { publishedDate, user, tags, title, body, _id } = post;
+const Title = styled.h3`
+  font-weight: bold;
+  font-size: 1.5rem;
+`;
 
-//   return (
-//     <PostItemBlock>
-//       <h2>
-//         <Link to={`/@${user.username}/${_id}`}>{title}</Link>
-//       </h2>
-//       <SubInfo
-//         username={user.username}
-//         publishedDate={new Date(publishedDate)}
-//       />
-//       <Tags tags={tags} />
-//       <p>{body}</p>
-//     </PostItemBlock>
-//   );
-// };
+const TagsBlock = styled.div`
+  margin-top: 0.5rem;
+  .tag {
+    display: inline-block;
+    color: ${palette.gray[5]};
+    text-decoration: none;
+    margin-right: 0.5rem;
+    &:hover {
+      color: ${palette.cyan[6]};
+    }
+  }
+`;
 
-const PostItem = () => {
+const Tags = ({ tags }) => {
+  return (
+    <TagsBlock>
+      <span className="tag">#{tags}</span>
+    </TagsBlock>
+  );
+};
+
+const PostItem = ({ post }) => {
+  const { date, username, tags, title, body, id } = post;
   return (
     <PostItemBlock>
-      <h3>제목</h3>
-      <SubInfo username={'usernametest'} publishedDate={new Date()}></SubInfo>
-      {/* <Tags tags={'태그예시'} />  태그는 url로 구분할거니까 제외요*/}
-      <p> 포스트 내용 일부분 예시 </p>
+      <Link to={`/2/${id}`}>
+        <Title>{title}</Title>
+      </Link>
+      <SubInfo username={username} publishedDate={new Date(date)} />
+      <Tags tags={tags} />
+      <p>{body}</p>
     </PostItemBlock>
   );
 };
 
-// const PostList = ({ posts, loading, error, showWriteButton }) => {
-//   // 에러 발생 시
-//   if (error) {
-//     return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
-//   }
-
-//   return (
-//     <PostListBlock>
-//       <WritePostButtonWrapper>
-//         {showWriteButton && (
-//           <Button cyan to="/write">
-//             새 글 작성하기
-//           </Button>
-//         )}
-//       </WritePostButtonWrapper>
-//       {/*  로딩 중 아니고, 포스트 배열이 존재할 때만 보여줌 */}
-//       {!loading && posts && (
-//         <div>
-//           {posts.map((post) => (
-//             <PostItem post={post} key={post._id} />
-//           ))}
-//         </div>
-//       )}
-//     </PostListBlock>
-//   );
-// };
-
-// export default PostList;
-
-const PostList = () => {
+const PostList = ({ posts, loading, error, showWriteButton }) => {
+  if (error) {
+    return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
+  }
   return (
     <PostListBlock>
       <WritePostButtonWrapper>
@@ -102,11 +86,13 @@ const PostList = () => {
           새 글 작성하기
         </Button>
       </WritePostButtonWrapper>
-      <div>
-        <PostItem />
-        <PostItem />
-        <PostItem />
-      </div>
+      {!loading && posts && (
+        <div>
+          {posts.map((post) => (
+            <PostItem post={post} key={post._id} />
+          ))}
+        </div>
+      )}
     </PostListBlock>
   );
 };
