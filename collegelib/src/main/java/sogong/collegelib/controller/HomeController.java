@@ -28,6 +28,7 @@ public class HomeController {
     private final UserRepository userRepository;
     private final BookService bookService;
 
+<<<<<<< HEAD
 //    @GetMapping("/search")
 //    public List<BookDto> homeLogin(@RequestParam("keyword") String keyword, HttpServletRequest request) {
 ////        HttpSession session = request.getSession(false);
@@ -51,6 +52,11 @@ public class HomeController {
 //            bookDto.setName(book.getName());
 //            bookDto.setAuthorName(book.getAuthor().getName());
 //            bookDtoList.add(bookDto);
+    //@GetMapping("/search")
+    //public List<BookDto> homeLogin(@RequestParam("keyword") String keyword, HttpServletRequest request) {
+//        HttpSession session = request.getSession(false);
+//        if (session == null) {
+//            throw new NotLoginUserException();
 //        }
 //        return bookDtoList;
 //    }

@@ -42,4 +42,5 @@ public class BoardExControllerAdvice {
     public ErrorResult notExistPostExHandle() {
         return new ErrorResult("notExistPost", "존재하지 않는 게시글의 정보입니다.");
     }
+
 }
