@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { writeComment } from '../../modules/comment';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -46,25 +46,32 @@ const CommentWriteButton = styled.button`
   }
 `;
 
-const CommentWritingContainer = () => {
-  const { post } = useSelector(({ comment, post }) => ({
+const CommentWritingContainer = ({ postId }) => {
+  const { post, comments, commentError } = useSelector(({ comment, post }) => ({
     post: post.post,
+    comments: comment.comment,
+    commentError: comment.commentError,
   }));
   const dispatch = useDispatch();
   const [comment, setComment] = useState('');
-
-  const postId = post.id;
 
   const onChange = (e) => {
     setComment(e.target.value);
     console.log('댓글입력 테스트', comment, postId);
   };
 
-  const onSubmit = () => {
-    //댓글 내용변수 comment를 dispatch한다.
-
+  const onSubmit = useCallback(() => {
     dispatch(writeComment({ comment, postId }));
-  };
+  }, [comment, dispatch, postId]);
+
+  useEffect(() => {
+    if (comments) {
+      console.log(comments);
+    }
+    if (commentError) {
+      console.log(commentError);
+    }
+  }, [comments, commentError]);
 
   return (
     <div className="commentContainer">

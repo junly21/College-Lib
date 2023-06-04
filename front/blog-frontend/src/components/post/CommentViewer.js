@@ -63,7 +63,7 @@ const CommentContent = styled.div`
 //   );
 // };
 
-const CommentViewer = () => {
+const CommentViewer = ({ postId }) => {
   return (
     <CommentViewerBlock>
       <CommentHead>
@@ -78,7 +78,7 @@ const CommentViewer = () => {
         <h4>닉네임</h4>
         <CommentContent>가나다라</CommentContent>
       </CommentHead>
-      <CommentWritingContainer />
+      <CommentWritingContainer postId={postId} />
     </CommentViewerBlock>
   );
 };

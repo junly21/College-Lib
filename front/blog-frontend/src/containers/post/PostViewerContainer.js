@@ -59,7 +59,7 @@ const PostViewerContainer = ({ bookId }) => {
           ownPost && <PostActionButtons onRemove={onRemove} />
         }
       />
-      <CommentViewer />
+      <CommentViewer postId={postId} />
     </>
   );
 };
