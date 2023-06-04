@@ -8,6 +8,7 @@ import PostPage from './pages/PostPage';
 import SearchListPage from './pages/SearchListPage';
 import BookInfoPage from './pages/BookInfoPage';
 import BoardPage from './pages/BoardPage';
+import TestPage from './pages/TestPage';
 
 const App = () => {
   return (
@@ -15,32 +16,23 @@ const App = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/write" element={<WritePage />} />
+      <Route path="/:bookId/write" element={<WritePage />} />
 
       <Route path="/search">
         <Route path=":keyword" element={<SearchListPage />} />
       </Route>
 
-      <Route path="/info">
-        <Route path=":bookId" element={<BookInfoPage />} />
-      </Route>
+      <Route path="/info/:bookId" element={<BookInfoPage />} />
+      <Route path="/:bookId/:postId" element={<PostPage />} />
+      <Route path="/:bookId/board/:tags" element={<PostListPage />} />
 
       <Route path="/board">
         <Route path=":bookId" element={<BoardPage />} />
       </Route>
 
-      <Route path="/2">
-        {/* <Route path=":bookId" element={<PostPage />} /> */}
+      <Route path=":bookId" element>
         <Route path=":postId" element={<PostPage />} />
       </Route>
-      {/* 여기 board/buy/2/write에서 navigate */}
-
-      <Route path="/postlist" element={<PostListPage />} />
-      {/* 
-      <Route path="/@:username">
-        <Route index element={<HomePage />} />
-        <Route path=":postId" element={<PostPage />} />
-      </Route> */}
     </Routes>
   );
 };

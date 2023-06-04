@@ -61,11 +61,11 @@ const Tags = ({ tags }) => {
   );
 };
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, bookId }) => {
   const { date, username, tags, title, body, id } = post;
   return (
     <PostItemBlock>
-      <Link to={`/2/${id}`}>
+      <Link to={`/${bookId}/${id}`}>
         <Title>{title}</Title>
       </Link>
       <SubInfo username={username} publishedDate={new Date(date)} />
@@ -75,21 +75,21 @@ const PostItem = ({ post }) => {
   );
 };
 
-const PostList = ({ posts, loading, error, showWriteButton }) => {
+const PostList = ({ posts, loading, error, bookId }) => {
   if (error) {
     return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
   }
   return (
     <PostListBlock>
       <WritePostButtonWrapper>
-        <Button cyan to="/write">
+        <Button cyan to={`/${bookId}/write`}>
           새 글 작성하기
         </Button>
       </WritePostButtonWrapper>
       {!loading && posts && (
         <div>
           {posts.map((post) => (
-            <PostItem post={post} key={post._id} />
+            <PostItem post={post} key={post.id} bookId={bookId} />
           ))}
         </div>
       )}
