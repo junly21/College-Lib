@@ -3,6 +3,8 @@ import palette from '../../lib/styles/palette';
 import { useState, useEffect, useCallback } from 'react';
 import { writeComment } from '../../modules/comment';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import book from '../../modules/book';
 
 const StyledInput = styled.input`
   margin-top: 1rem;
@@ -46,13 +48,13 @@ const CommentWriteButton = styled.button`
   }
 `;
 
-const CommentWritingContainer = ({ postId }) => {
-  const { post, comment, commentError } = useSelector(({ comment, post }) => ({
-    post: post.post,
+const CommentWritingContainer = ({ bookId, postId }) => {
+  const { comment, commentError } = useSelector(({ comment }) => ({
     comment: comment.comment,
     commentError: comment.commentError,
   }));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [body, setComment] = useState('');
 
   const onChange = (e) => {
@@ -62,7 +64,9 @@ const CommentWritingContainer = ({ postId }) => {
 
   const onSubmit = useCallback(() => {
     dispatch(writeComment({ body, postId }));
-  }, [body, postId, dispatch]);
+    navigate(`/${bookId}/${postId}`);
+    // navigate('/');
+  }, [body, postId, dispatch, navigate]);
 
   useEffect(() => {
     if (comment) {

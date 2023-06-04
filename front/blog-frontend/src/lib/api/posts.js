@@ -11,12 +11,6 @@ export const writePost = ({ title, body, tags, bookId }) => {
 export const readPost = ({ bookId, postId }) =>
   client.get(`/${bookId}/${postId}`); //BookId/postId로 리다이렉트 해서 글 정보 받음
 
-// export const listPosts = ({ bookId, tag }) => {
-//   console.log('리스트포스트입니다. 보낸 bookId:', bookId, '  보낸 Tag:', tag);
-//   // return client.get(`/${bookId.bookId}/${bookId.tag}`);
-//   return client.get(`/${bookId.bookId}/${bookId.tag}`);
-// };
-
 //콘솔로그 찍으면 안되더라..
 export const listPosts = ({ bookId, tag }) => client.get(`/${bookId}/${tag}`);
 // export const listPosts = (tags) => {

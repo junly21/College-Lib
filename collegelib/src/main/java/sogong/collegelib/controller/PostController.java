@@ -144,19 +144,24 @@ public class PostController {
     }
 
     @PostMapping("/comment/{postId}")  //댓글
-    public String postComment(@PathVariable Long postId, @RequestBody String comment, HttpSession session) {
+    public CommentDto postComment(@PathVariable Long postId, @RequestBody String body, HttpSession session) {
         User loginUser = (User)session.getAttribute("loginUser");
         Post post = postService.findOne(postId);
         Comment commentDto = new Comment();
-        commentDto.setText(comment);
+        commentDto.setText(body);
         commentDto.setDate(LocalDateTime.now());
         commentDto.setUser(loginUser);
         commentDto.setPost(post);
         post.getAnswers().add(commentDto);
         commentService.saveComment(commentDto);
 
+        CommentDto commentDto1 = new CommentDto();
+        commentDto1.setDate(commentDto.getDate());
+        commentDto1.setText(commentDto.getText());
+        commentDto1.setUser(new UserDtoTwo(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getUsername()));
 
-        return commentDto.getText();
+
+        return commentDto1;
     }
 
     @DeleteMapping("/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭

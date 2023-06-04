@@ -7,6 +7,7 @@ import PostActionButtons from '../../components/post/PostActionButtons';
 import { removePost } from '../../lib/api/posts';
 import { useParams, useNavigate } from 'react-router-dom';
 import CommentViewer from '../../components/post/CommentViewer';
+//import CommentViewerContainer from './CommentViewerContainer';
 
 const PostViewerContainer = ({ bookId }) => {
   // 처음 마운트될 때 포스트 읽기 API 요청
@@ -24,17 +25,10 @@ const PostViewerContainer = ({ bookId }) => {
 
   useEffect(() => {
     dispatch(readPost({ bookId, postId }));
-    console.log('postviewercontainer에서 받은', bookId);
-    // 언마운트될 때 리덕스에서 포스트 데이터 없애기
     return () => {
       dispatch(unloadPost());
     };
   }, [dispatch, bookId, postId]);
-
-  // const onEdit = () => {
-  //   dispatch(setOriginalPost(post));
-  //   navigate('/write');
-  // };
 
   const onRemove = async () => {
     try {
@@ -45,7 +39,6 @@ const PostViewerContainer = ({ bookId }) => {
     }
   };
 
-  //const ownPost = (user && user.id) === (post && post.user.id);
   const ownPost = (user && user.loginId) === (post && post.user.loginId);
 
   return (
@@ -54,12 +47,14 @@ const PostViewerContainer = ({ bookId }) => {
         post={post}
         loading={loading}
         error={error}
-        actionButtons={
-          // ownPost && <PostActionButtons onEdit={onEdit} onRemove={onRemove} />
-          ownPost && <PostActionButtons onRemove={onRemove} />
-        }
+        actionButtons={ownPost && <PostActionButtons onRemove={onRemove} />}
       />
-      <CommentViewer postId={postId} />
+      <CommentViewer
+        postId={postId}
+        bookId={bookId}
+        loading={loading}
+        post={post}
+      />
     </>
   );
 };

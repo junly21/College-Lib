@@ -63,22 +63,33 @@ const CommentContent = styled.div`
 //   );
 // };
 
-const CommentViewer = ({ postId }) => {
+const CommentItem = ({ comment }) => {
+  const { user, text } = comment; //기타 책 정보들 SearchListContainer에서 props로 줄거임.
+  const filteredText = JSON.parse(text).body;
+
+  return (
+    <CommentHead>
+      {user.username}
+      <CommentContent>{filteredText}</CommentContent>
+    </CommentHead>
+  );
+};
+
+const CommentViewer = ({ postId, bookId, loading, post }) => {
+  if (loading || !post) {
+    return null;
+  }
+  const comments = post.comments;
   return (
     <CommentViewerBlock>
-      <CommentHead>
-        <h4>닉네임</h4>
-        <CommentContent>가나다라</CommentContent>
-      </CommentHead>
-      <CommentHead>
-        <h4>닉네임</h4>
-        <CommentContent>가나다라</CommentContent>
-      </CommentHead>
-      <CommentHead>
-        <h4>닉네임</h4>
-        <CommentContent>가나다라</CommentContent>
-      </CommentHead>
-      <CommentWritingContainer postId={postId} />
+      {!loading && comments && (
+        <div>
+          {comments.map((comment) => (
+            <CommentItem comment={comment} />
+          ))}
+        </div>
+      )}
+      <CommentWritingContainer postId={postId} bookId={bookId} />
     </CommentViewerBlock>
   );
 };
