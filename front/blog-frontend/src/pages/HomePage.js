@@ -1,28 +1,33 @@
 import React from 'react';
 import HeaderContainer from '../containers/common/HeaderContainer';
-import Button from '../components/common/Button';
+import Button from '../components/common/HomeSearchButton';
 import { useNavigate } from 'react-router-dom';
-import SearchBar from '../components/common/SearchBar';
+import SearchBar from '../components/common/HomeSearchBar';
+import styled from 'styled-components';
+import Responsive from '../components/common/Responsive';
+
+const BookImage = styled.img`
+  width: 100%;
+  border: 5px solid #000000;
+  border-radius: 15px;
+`;
+
+const HomePageBlock = styled(Responsive)`
+  margin-top: 1.5rem;
+`;
 
 const HomePage = () => {
   const navigate = useNavigate();
 
-  const goWrite = () => {
-    navigate('/write');
-  };
-  const goPostlist = () => {
-    navigate('/2/buy');
-  };
   return (
     <>
       <HeaderContainer />
-      <SearchBar />
-      {/* <div>
-        <Button onClick={goWrite}>글쓰기</Button>
-      </div> */}
-      {/* <div>
-        <Button onClick={goPostlist}>글목록(일단buy만)</Button>
-      </div> */}
+      <HomePageBlock>
+        <div className="c1image">
+          <BookImage src="/img/homeImg.jpeg" />
+        </div>
+        <SearchBar />
+      </HomePageBlock>
     </>
   );
 };
