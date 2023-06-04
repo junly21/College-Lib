@@ -3,6 +3,8 @@ package sogong.collegelib.controller.dto;
 import lombok.Data;
 import sogong.collegelib.domain.PostType;
 
+import java.util.List;
+
 @Data
 public class PostDto {
     private String title;
@@ -10,5 +12,6 @@ public class PostDto {
     private String tags;
     private UserDtoTwo user;
     private Long id;
+    private List<CommentDto> comments;
 
 }

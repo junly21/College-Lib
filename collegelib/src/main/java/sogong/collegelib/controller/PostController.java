@@ -1,19 +1,16 @@
 package sogong.collegelib.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import sogong.collegelib.Service.BookService;
+import sogong.collegelib.Service.CommentService;
 import sogong.collegelib.Service.PostService;
-import sogong.collegelib.controller.dto.BookDto;
-import sogong.collegelib.controller.dto.PostDto;
-import sogong.collegelib.controller.dto.PostListDto;
-import sogong.collegelib.controller.dto.UserDtoTwo;
-import sogong.collegelib.domain.Book;
-import sogong.collegelib.domain.Post;
-import sogong.collegelib.domain.PostType;
-import sogong.collegelib.domain.User;
+import sogong.collegelib.controller.dto.*;
+import sogong.collegelib.domain.*;
+import sogong.collegelib.exception.board.InvalidUserException;
 import sogong.collegelib.exception.board.NotExistBookException;
 import sogong.collegelib.exception.board.NotExistPostException;
 
@@ -28,6 +25,7 @@ public class PostController {
 
     private final PostService postService;
     private final BookService bookService;
+    private final CommentService commentService;
 
     @GetMapping("/{bookId}/buy")
     public List<PostListDto> getBuyBoard(@PathVariable Long bookId) {
@@ -114,26 +112,44 @@ public class PostController {
     @GetMapping("/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭
     public PostDto getBuyPost(@PathVariable Long bookId, @PathVariable Long postId, HttpSession session) {
         Book book = bookService.findOne(bookId);
-        User loginUser = (User) session.getAttribute("loginUser");
-        System.out.println("loginUser = " + loginUser.toString());
+        Post post = postService.findOne(postId);
+        User user = post.getUser();
 
-        if(book == null){
+        if (book == null) {
             throw new NotExistBookException();
+        } else if (post == null) {
+            throw new NotExistPostException();
         }
 
-        for (Post post : book.getPosts()) {
-            if(post.getId() == postId) {
 
-                PostDto dto = new PostDto();
-                dto.setBody(post.getBody());
-                dto.setTitle(post.getTitle());
-                dto.setTags(post.getTags());
-                dto.setId(post.getId());
-                dto.setUser(new UserDtoTwo(loginUser.getId(), loginUser.getLoginId(), loginUser.getPassword(), loginUser.getUsername()));
-                return dto;
-            }
+        PostDto postDto = new PostDto();
+        postDto.setBody(post.getBody());
+        postDto.setTitle(post.getTitle());
+        postDto.setTags(post.getTags());
+        postDto.setId(post.getId());
+        postDto.setUser(new UserDtoTwo(user.getId(), user.getLoginId(), user.getPassword(), user.getUsername()));
+
+        for (Comment comment : post.getAnswers()) {
+            CommentDto commentDto = new CommentDto();
+            commentDto.setText(commentDto.getText());
+            commentDto.setDate(comment.getDate());
+            commentDto.setUser(new UserDtoTwo(comment.getUser().getId(), comment.getUser().getLoginId(), comment.getUser().getPassword(), comment.getUser().getUsername()));
+            postDto.getComments().add(commentDto);
         }
-        throw new NotExistPostException();
+        return postDto;
+    }
+
+    @PostMapping("/{bookId}/{postId}")  //댓글
+    public void postComment(@PathVariable Long bookId, @PathVariable Long postId, @RequestBody String comment, HttpSession session) {
+        User loginUser = (User)session.getAttribute("loginUser");
+        Post post = postService.findOne(postId);
+        Comment commentDto = new Comment();
+        commentDto.setText(comment);
+        commentDto.setDate(LocalDateTime.now());
+        commentDto.setUser(loginUser);
+        commentDto.setPost(post);
+        post.getAnswers().add(commentDto);
+        commentService.saveComment(commentDto);
     }
 
     @DeleteMapping("/{bookId}/{postId}")  //삽니다 게시판에서 특정 게시글 클릭
@@ -146,11 +162,12 @@ public class PostController {
             throw new NotExistBookException();
         }
 
+
         postService.deleteById(postId);
         throw new NotExistPostException();
     }
 
-    @PostMapping("/{bookId}/{postId}/edit")  //삽니다 게시판에서 특정 게시글 클릭
+    @PostMapping("/{bookId}/{postId}/edit")
     public PostDto editPost(@RequestBody PostDto postDto, @PathVariable Long bookId, @PathVariable Long postId, HttpSession session) {
         Book book = bookService.findOne(bookId);
         User loginUser = (User) session.getAttribute("loginUser");
