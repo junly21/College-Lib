@@ -3,6 +3,8 @@ import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
 import CommentWritingContainer from '../../containers/post/CommentWritingContainer';
 import CommentActionButtons from '../../components/post/CommentActionButtons';
+import { useNavigate } from 'react-router-dom';
+import { removeComments } from '../../lib/api/comments';
 
 const CommentViewerBlock = styled(Responsive)`
   border: 1px solid ${palette.red[1]};
@@ -38,17 +40,26 @@ const CommentContent = styled.div`
   margin-bottom: 1rem;
 `;
 
-const CommentItem = ({ comment, postuser }) => {
-  const { user, text } = comment; //기타 책 정보들 SearchListContainer에서 props로 줄거임.
+const CommentItem = ({ postId, bookId, comment, postuser }) => {
+  const { user, text, id } = comment; //기타 책 정보들 SearchListContainer에서 props로 줄거임.
   const filteredText = JSON.parse(text).body;
-
+  const navigate = useNavigate();
   const ownPost = postuser === (user && user.loginId);
+
+  const onRemove = async () => {
+    try {
+      await removeComments({ bookId, postId, id });
+      navigate(`/info/${bookId}/`); // 글 목록으로
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <CommentHead>
       {user.username}
       <CommentContent>{filteredText}</CommentContent>
-      {ownPost && <CommentActionButtons />}
+      {ownPost && <CommentActionButtons onRemove={onRemove} />}
     </CommentHead>
   );
 };
@@ -64,7 +75,12 @@ const CommentViewer = ({ postId, bookId, loading, post, user }) => {
       {!loading && comments && (
         <div>
           {comments.map((comment) => (
-            <CommentItem comment={comment} postuser={postuser} />
+            <CommentItem
+              postId={postId}
+              bookId={bookId}
+              comment={comment}
+              postuser={postuser}
+            />
           ))}
         </div>
       )}

@@ -17,6 +17,13 @@ export const listPosts = ({ bookId, tag }) => client.get(`/${bookId}/${tag}`);
 //   return client.get(`/2/${tags}`);
 // };
 
+export const updatePost = ({ id, title, body, tags }) =>
+  client.patch(`/write/${id}`, {
+    title,
+    body,
+    tags,
+  });
+
 export const removePost = ({ bookId, postId }) =>
   client.delete(`/${bookId}/${postId}`);
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { readPost, unloadPost } from '../../modules/post';
 import PostViewer from '../../components/post/PostViewer';
 import PostActionButtons from '../../components/post/PostActionButtons';
-//import { setOriginalPost } from '../../modules/write';
+import { setOriginalPost } from '../../modules/write';
 import { removePost } from '../../lib/api/posts';
 import { useParams, useNavigate } from 'react-router-dom';
 import CommentViewer from '../../components/post/CommentViewer';
@@ -30,6 +30,10 @@ const PostViewerContainer = ({ bookId }) => {
     };
   }, [dispatch, bookId, postId]);
 
+  const onEdit = () => {
+    dispatch(setOriginalPost(post));
+    navigate(`/${bookId}/write`);
+  };
   const onRemove = async () => {
     try {
       await removePost({ bookId, postId });
@@ -47,7 +51,9 @@ const PostViewerContainer = ({ bookId }) => {
         post={post}
         loading={loading}
         error={error}
-        actionButtons={ownPost && <PostActionButtons onRemove={onRemove} />}
+        actionButtons={
+          ownPost && <PostActionButtons onEdit={onEdit} onRemove={onRemove} />
+        }
       />
       <CommentViewer
         postId={postId}
