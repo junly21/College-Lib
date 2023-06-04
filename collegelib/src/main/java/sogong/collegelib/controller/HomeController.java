@@ -28,7 +28,6 @@ public class HomeController {
     private final UserRepository userRepository;
     private final BookService bookService;
 
-<<<<<<< HEAD
 //    @GetMapping("/search")
 //    public List<BookDto> homeLogin(@RequestParam("keyword") String keyword, HttpServletRequest request) {
 ////        HttpSession session = request.getSession(false);

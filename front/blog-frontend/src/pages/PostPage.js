@@ -3,7 +3,6 @@ import HeaderContainer from '../containers/common/HeaderContainer';
 import PostViewer from '../components/post/PostViewer';
 import PostViewerContainer from '../containers/post/PostViewerContainer';
 import { useParams } from 'react-router-dom';
-import CommentViewer from '../components/post/CommentViewer';
 
 const PostPage = () => {
   const { bookId } = useParams();
@@ -12,7 +11,6 @@ const PostPage = () => {
     <>
       <HeaderContainer />
       <PostViewerContainer bookId={bookId} />
-      <CommentViewer />
     </>
   );
 };

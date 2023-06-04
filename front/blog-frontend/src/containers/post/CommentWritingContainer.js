@@ -47,31 +47,31 @@ const CommentWriteButton = styled.button`
 `;
 
 const CommentWritingContainer = ({ postId }) => {
-  const { post, comments, commentError } = useSelector(({ comment, post }) => ({
+  const { post, comment, commentError } = useSelector(({ comment, post }) => ({
     post: post.post,
-    comments: comment.comment,
+    comment: comment.comment,
     commentError: comment.commentError,
   }));
   const dispatch = useDispatch();
-  const [comment, setComment] = useState('');
+  const [body, setComment] = useState('');
 
   const onChange = (e) => {
     setComment(e.target.value);
-    console.log('댓글입력 테스트', comment, postId);
+    console.log('댓글입력 테스트', body, postId);
   };
 
   const onSubmit = useCallback(() => {
-    dispatch(writeComment({ comment, postId }));
-  }, [comment, dispatch, postId]);
+    dispatch(writeComment({ body, postId }));
+  }, [body, postId, dispatch]);
 
   useEffect(() => {
-    if (comments) {
-      console.log(comments);
+    if (comment) {
+      console.log(comment);
     }
     if (commentError) {
       console.log(commentError);
     }
-  }, [comments, commentError]);
+  }, [comment, commentError]);
 
   return (
     <div className="commentContainer">
@@ -79,7 +79,7 @@ const CommentWritingContainer = ({ postId }) => {
         <StyledInput
           type="text"
           placeholder="댓글을 입력하세요"
-          value={comment}
+          value={body}
           onChange={onChange}
         />
         <CommentWriteButtonBlock>

@@ -15,13 +15,10 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value,
 }));
-export const writeComment = createAction(
-  WRITE_COMMENT,
-  ({ comment, postId }) => ({
-    comment,
-    postId,
-  }),
-);
+export const writeComment = createAction(WRITE_COMMENT, ({ body, postId }) => ({
+  body,
+  postId,
+}));
 
 const writeCommentSaga = createRequestSaga(
   WRITE_COMMENT,

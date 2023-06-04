@@ -26,6 +26,6 @@ export const listPosts = ({ bookId, tag }) => client.get(`/${bookId}/${tag}`);
 export const removePost = ({ bookId, postId }) =>
   client.delete(`/${bookId}/${postId}`);
 
-export const writeComment = ({ postId, comment }) => {
-  return client.post(`/comment/${postId}`, { comment });
+export const writeComment = ({ postId, body }) => {
+  return client.post(`/comment/${postId}`, { body });
 };
