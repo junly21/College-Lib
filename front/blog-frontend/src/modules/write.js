@@ -90,9 +90,9 @@ const write = handleActions(
       ...state,
       post,
     }),
-    [UPDATE_POST_FAILURE]: (state, { payload: postError }) => ({
+    [UPDATE_POST_FAILURE]: (state, { payload: post }) => ({
       ...state,
-      postError,
+      post,
     }),
   },
   initialState,

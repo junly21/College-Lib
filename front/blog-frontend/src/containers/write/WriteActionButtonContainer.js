@@ -18,13 +18,14 @@ const WriteActionButtonsContainer = ({ bookId }) => {
     }),
   );
 
-  // 포스트 등록
+  // 포스트 수정및 등록
   const onPublish = () => {
     if (originalPostId) {
       dispatch(updatePost({ title, body, tags, id: originalPostId, bookId }));
       console.log('오리지날포스트아이디', originalPostId);
       return;
     }
+
     dispatch(
       writePost({
         title,
@@ -42,12 +43,14 @@ const WriteActionButtonsContainer = ({ bookId }) => {
 
   // 성공 혹은 실패시 할 작업
   useEffect(() => {
+    if (post && post.message) {
+      console.log(post.message);
+      window.alert(post.message);
+      return;
+    }
     if (post) {
       const { id } = post;
       navigate(`/${bookId}/${id}`);
-    }
-    if (postError) {
-      console.log(postError);
     }
   }, [navigate, post, postError]);
 

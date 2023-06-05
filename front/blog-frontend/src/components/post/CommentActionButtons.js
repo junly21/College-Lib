@@ -46,7 +46,6 @@ const CommentActionButtons = ({ onEdit, onRemove }) => {
       <CommentActionButtonsBlock>
         {/* <ActionButton onClick={onEdit}>수정</ActionButton>
         <ActionButton onClick={onRemoveClick}>삭제</ActionButton> */}
-        <ActionButton>수정</ActionButton>
         <ActionButton onClick={onRemoveClick}>삭제</ActionButton>
       </CommentActionButtonsBlock>
       <AskRemoveModal
