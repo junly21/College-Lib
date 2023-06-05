@@ -10,9 +10,7 @@ import sogong.collegelib.Service.CommentService;
 import sogong.collegelib.Service.PostService;
 import sogong.collegelib.controller.dto.*;
 import sogong.collegelib.domain.*;
-import sogong.collegelib.exception.board.InvalidUserException;
-import sogong.collegelib.exception.board.NotExistBookException;
-import sogong.collegelib.exception.board.NotExistPostException;
+import sogong.collegelib.exception.board.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -235,6 +233,19 @@ public class PostController {
         Book book = bookService.findOne(bookId);
         User loginUser = (User) session.getAttribute("loginUser");
         System.out.println("loginUser = " + loginUser.toString());
+
+        if(postDto.getTitle() == null) {
+            throw new NullTitleException();
+        }
+
+        if(postDto.getBody() == null) {
+            throw new NullTextException();
+        }
+
+        if(postDto.getTags() == null) {
+            throw new NullTagException();
+        }
+
 
         Post post = new Post();
         post.setBody(postDto.getBody());

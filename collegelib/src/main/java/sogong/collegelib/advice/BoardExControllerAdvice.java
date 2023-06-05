@@ -28,7 +28,13 @@ public class BoardExControllerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(NullTextException.class)
     public ErrorResult nullTextExHandle() {
-        return new ErrorResult("nullTitle", "본문 내용을 입력하시오.");
+        return new ErrorResult("nullBody", "본문 내용을 입력하시오.");
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(NullTextException.class)
+    public ErrorResult nullTagExHandle() {
+        return new ErrorResult("nullTag", "게시글의 태그를 설정해 주세요.");
     }
 
     @ResponseStatus(HttpStatus.OK)
