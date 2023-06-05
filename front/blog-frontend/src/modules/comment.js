@@ -48,9 +48,9 @@ const comment = handleActions(
       comment,
     }),
     // 포스트 작성 실패
-    [WRITE_COMMENT_FAILURE]: (state, { payload: commentError }) => ({
+    [WRITE_COMMENT_FAILURE]: (state, { payload: comment }) => ({
       ...state,
-      commentError,
+      comment,
     }),
   },
   initialState,

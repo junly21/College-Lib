@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import Responsive from '../common/Responsive';
 import Button from '../common/Button';
 import palette from '../../lib/styles/palette';
-
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const SearchListBlock = styled(Responsive)`
@@ -90,6 +90,7 @@ const Tags = ({ tags }) => {
 
 const SearchItem = ({ book }) => {
   const { id, name, authorName } = book; //기타 책 정보들 SearchListContainer에서 props로 줄거임.
+
   return (
     <SearchItemBlock>
       <Link to={`/info/${id}`}>
@@ -101,9 +102,16 @@ const SearchItem = ({ book }) => {
 };
 
 const SearchList = ({ books, loading, error }) => {
+  useEffect(() => {
+    if (!loading && books && books.length === 0) {
+      // 검색 결과가 없는 경우에만 alert 메시지를 출력
+      window.alert('검색 결과가 없습니다.');
+    }
+  }, [loading, books]);
   if (error) {
     return <SearchListBlock>에러가 발생했습니다.</SearchListBlock>;
   }
+
   return (
     <SearchListBlock>
       {!loading && books && (

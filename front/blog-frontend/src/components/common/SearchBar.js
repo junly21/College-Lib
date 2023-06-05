@@ -31,6 +31,10 @@ const SearchBar = () => {
   const [keyword, setSearchTerm] = useState('');
 
   const onSearch = () => {
+    if (!keyword) {
+      window.alert('검색어를 입력해주세요.');
+      return;
+    }
     navigate(`/search/${keyword}`);
   };
 

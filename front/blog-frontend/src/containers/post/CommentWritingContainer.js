@@ -69,11 +69,12 @@ const CommentWritingContainer = ({ bookId, postId }) => {
   }, [body, postId, dispatch, navigate]);
 
   useEffect(() => {
+    if (comment && comment.message) {
+      window.alert(comment.message);
+      return;
+    }
     if (comment) {
       console.log(comment);
-    }
-    if (commentError) {
-      console.log(commentError);
     }
   }, [comment, commentError]);
 
