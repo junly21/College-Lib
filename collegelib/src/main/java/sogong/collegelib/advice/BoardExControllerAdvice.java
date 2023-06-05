@@ -32,7 +32,7 @@ public class BoardExControllerAdvice {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(NullTextException.class)
+    @ExceptionHandler(NullTagException.class)
     public ErrorResult nullTagExHandle() {
         return new ErrorResult("nullTag", "게시글의 태그를 설정해 주세요.");
     }
