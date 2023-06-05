@@ -38,6 +38,12 @@ public class BoardExControllerAdvice {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(NullCommentbody.class)
+    public ErrorResult nullCommentBodyExHandle() {
+        return new ErrorResult("nullBody", "댓글을 입력해주세요.");
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(InvalidUserException.class)
     public ErrorResult invalidUserExHandle() {
         return new ErrorResult("invalidUser", "허용되지 않는 접근입니다.");

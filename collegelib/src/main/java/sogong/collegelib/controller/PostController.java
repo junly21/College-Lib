@@ -146,6 +146,7 @@ public class PostController {
     public CommentDto postComment(@PathVariable Long postId, @RequestBody String body, HttpSession session) {
         User loginUser = (User)session.getAttribute("loginUser");
         Post post = postService.findOne(postId);
+
         Comment commentDto = new Comment();
         commentDto.setText(body);
         commentDto.setDate(LocalDateTime.now());
