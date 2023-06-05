@@ -234,15 +234,15 @@ public class PostController {
         User loginUser = (User) session.getAttribute("loginUser");
         System.out.println("loginUser = " + loginUser.toString());
 
-        if(postDto.getTitle() == null) {
+        if(postDto.getTitle().equals("")) {
             throw new NullTitleException();
         }
 
-        if(postDto.getBody() == null) {
+        if(postDto.getBody().equals("")) {
             throw new NullTextException();
         }
 
-        if(postDto.getTags() == null) {
+        if(postDto.getTags().equals("")) {
             throw new NullTagException();
         }
 
