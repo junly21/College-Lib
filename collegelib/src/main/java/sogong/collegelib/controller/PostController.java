@@ -238,7 +238,7 @@ public class PostController {
             throw new NullTitleException();
         }
 
-        if(postDto.getBody().equals("")) {
+        if(postDto.getBody().equals("")||postDto.getBody().equals("<p><br></p>")) {
             throw new NullTextException();
         }
 
