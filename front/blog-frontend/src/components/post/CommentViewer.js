@@ -40,7 +40,7 @@ const CommentContent = styled.div`
   margin-bottom: 1rem;
 `;
 
-const CommentItem = ({ postId, bookId, comment, postuser }) => {
+const CommentItem = ({ postId, bookId, comment, postuser, posttag }) => {
   const { user, text, id } = comment; //기타 책 정보들 SearchListContainer에서 props로 줄거임.
   const filteredText = JSON.parse(text).body;
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const CommentItem = ({ postId, bookId, comment, postuser }) => {
   const onRemove = async () => {
     try {
       await removeComments({ bookId, postId, id });
-      navigate(`/info/${bookId}/`); // 글 목록으로
+      navigate(`/${bookId}/board/${posttag}`); // 글 목록으로
     } catch (e) {
       console.log(e);
     }
@@ -70,6 +70,11 @@ const CommentViewer = ({ postId, bookId, loading, post, user }) => {
   }
   const comments = post.comments;
   const postuser = user.loginId;
+  let posttag;
+  if (post.tags === '삽니다') posttag = 'buy';
+  else if (post.tags === '팝니다') posttag = 'sell';
+  else if (post.tags === '질문') posttag = 'qa';
+
   return (
     <CommentViewerBlock>
       {!loading && comments && (
@@ -80,6 +85,7 @@ const CommentViewer = ({ postId, bookId, loading, post, user }) => {
               bookId={bookId}
               comment={comment}
               postuser={postuser}
+              posttag={posttag}
             />
           ))}
         </div>

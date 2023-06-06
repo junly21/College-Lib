@@ -32,6 +32,7 @@ const PostListContainer = ({ bookId, tag }) => {
       posts={posts}
       showWriteButton={user}
       bookId={bookId}
+      tag={tag}
     />
   );
 };

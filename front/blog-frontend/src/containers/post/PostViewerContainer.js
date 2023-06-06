@@ -7,7 +7,19 @@ import { setOriginalPost } from '../../modules/write';
 import { removePost } from '../../lib/api/posts';
 import { useParams, useNavigate } from 'react-router-dom';
 import CommentViewer from '../../components/post/CommentViewer';
-//import CommentViewerContainer from './CommentViewerContainer';
+import Button from '../../components/common/Button';
+import styled from 'styled-components';
+import palette from '../../lib/styles/palette';
+
+const ButtonBlock = styled.div`
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-top: -2rem;
+  margin-bottom: -2rem;
+  height: ;
+  display: flex;
+  justify-content: flex-end;
+`;
 
 const PostViewerContainer = ({ bookId }) => {
   // 처음 마운트될 때 포스트 읽기 API 요청
@@ -43,6 +55,14 @@ const PostViewerContainer = ({ bookId }) => {
     }
   };
 
+  const onClick = () => {
+    let tag = '';
+    if (post.tags === '삽니다') tag = 'buy';
+    else if (post.tags === '팝니다') tag = 'sell';
+    else if (post.tags === '질문') tag = 'qa';
+    navigate(`/${bookId}/board/${tag}`);
+  };
+
   const ownPost = (user && user.loginId) === (post && post.user.loginId);
 
   return (
@@ -55,6 +75,9 @@ const PostViewerContainer = ({ bookId }) => {
           ownPost && <PostActionButtons onEdit={onEdit} onRemove={onRemove} />
         }
       />
+      <ButtonBlock>
+        <Button onClick={onClick}>목록</Button>
+      </ButtonBlock>
       <CommentViewer
         postId={postId}
         bookId={bookId}

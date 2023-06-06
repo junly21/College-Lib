@@ -12,7 +12,7 @@ const PostListBlock = styled(Responsive)`
 
 const WritePostButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 2rem;
 `;
 
@@ -75,13 +75,41 @@ const PostItem = ({ post, bookId }) => {
   );
 };
 
-const PostList = ({ posts, loading, error, bookId }) => {
+const PostList = ({ posts, loading, error, bookId, tag }) => {
+  let button1Text;
+  let button1Link;
+  let button2Text;
+  let button2Link;
+
   if (error) {
     return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
   }
+
+  if (tag === 'buy') {
+    button1Text = '판매 게시판';
+    button1Link = `/${bookId}/board/sell`;
+    button2Text = '질문과 답변 게시판';
+    button2Link = `/${bookId}/board/qa`;
+  } else if (tag === 'sell') {
+    button1Text = '구매 게시판';
+    button1Link = `/${bookId}/board/buy`;
+    button2Text = '질문과 답변 게시판';
+    button2Link = `/${bookId}/board/qa`;
+  } else {
+    button1Text = '구매 게시판';
+    button1Link = `/${bookId}/board/buy`;
+    button2Text = '판매 게시판';
+    button2Link = `/${bookId}/board/sell`;
+  }
+
   return (
     <PostListBlock>
       <WritePostButtonWrapper>
+        <Button to={`/info/${bookId}/`}>책 정보로 돌아가기 </Button>
+        <div>
+          <Button to={button1Link}>{button1Text}</Button>
+          <Button to={button2Link}>{button2Text}</Button>
+        </div>
         <Button cyan to={`/${bookId}/write`}>
           새 글 작성하기
         </Button>
