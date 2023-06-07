@@ -12,11 +12,11 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
 const ButtonBlock = styled.div`
+  width: 75%;
   margin-left: 4rem;
   margin-right: 4rem;
   margin-top: -2rem;
   margin-bottom: -2rem;
-  height: ;
   display: flex;
   justify-content: flex-end;
 `;

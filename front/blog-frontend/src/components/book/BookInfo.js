@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const BookViewerBlock = styled(Responsive)`
   border: 1px solid ${palette.red[1]};
-  margin: 4rem;
+  margin: 2rem;
   padding-bottom: 1rem;
   display: flex;
 `;
