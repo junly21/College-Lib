@@ -22,7 +22,11 @@ const BookViewerContainer = ({ id }) => {
   //   console.log('BookviewerContainer:', id);
   //   console.log('book', book);
 
-  return <BookInfo book={book} loading={loading} error={error} />;
+  return (
+    <div>
+      <BookInfo book={book} loading={loading} error={error} />
+    </div>
+  );
 };
 
 export default BookViewerContainer;

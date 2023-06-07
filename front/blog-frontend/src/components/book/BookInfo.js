@@ -8,7 +8,20 @@ const BookViewerBlock = styled(Responsive)`
   border: 1px solid ${palette.red[1]};
   margin: 4rem;
   padding-bottom: 1rem;
+  display: flex;
 `;
+
+const InfoBlock = styled.div`
+  width: 60%;
+  border: 1px solid black;
+  margin: 4rem;
+  padding: 1rem;
+
+  h3:nth-of-type(1) {
+    margin-bottom: 4rem;
+  }
+`;
+
 const BookHead = styled.div`
   border-bottom: 1px solid ${palette.gray[2]};
 
@@ -77,18 +90,26 @@ const BookInfo = ({ book, loading, error }) => {
   };
   return (
     <BookViewerBlock>
-      <BookHead>
-        <h3>{name}</h3>
-        <SubInfo>
-          <b>{authorName}</b>
-        </SubInfo>
-      </BookHead>
-      <div className="c1image">
-        <BookImage src="/img/imageEx.jpeg" />
+      <div>
+        <BookHead>
+          <h3>{name}</h3>
+          <SubInfo>
+            <b>{authorName}</b>
+          </SubInfo>
+        </BookHead>
+        <div className="c1image">
+          <BookImage src="/img/imageEx.jpeg" />
+        </div>
+        <Button onClick={goBuylist}>삽니다</Button>
+        <Button onClick={goSelllist}>팝니다</Button>
+        <Button onClick={goQAlist}>질문</Button>
       </div>
-      <Button onClick={goBuylist}>삽니다</Button>
-      <Button onClick={goSelllist}>팝니다</Button>
-      <Button onClick={goQAlist}>질문</Button>
+      <InfoBlock>
+        <h2>이 책의 e-book을 구매하고 싶다면?</h2>
+        <h3>www.e-bookexample.com</h3>
+        <h2>이 책의 출판본을 구매하고 싶다면?</h2>
+        <h3>www.exbookexample.com</h3>
+      </InfoBlock>
     </BookViewerBlock>
   );
 };

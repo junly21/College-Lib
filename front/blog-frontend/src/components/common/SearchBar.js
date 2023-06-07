@@ -21,6 +21,7 @@ const StyledInput = styled.input`
 const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   //background-color: ${palette.red[1]};
   margin-left: 1rem;
   margin-top: 1rem;
